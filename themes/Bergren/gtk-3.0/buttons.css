@@ -1,0 +1,538 @@
+/******************************************************************************/
+/** GtkButton                                                                **/
+/******************************************************************************/
+
+.button,
+.button.menuitem.menubar {
+    padding: 3px;
+}
+
+.button {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: @border_normal;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_normal), to(shade (@bg_normal, 0.93)));
+}
+
+.button:hover,
+.toolbar .button:hover {
+    color: @fg_prelight;
+    border-color: @border_prelight;;
+    box-shadow: inset 1px 0 @lightborder_prelight,
+                inset -1px 0 @lightborder_prelight,
+                inset 0 1px @lightborder_prelight;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_prelight), to(shade (@bg_prelight, 0.93)));
+}
+
+.button:hover:active,
+.button:active,
+.toolbar .button:hover:active,
+.toolbar .button:active {
+    color: @fg_normal;
+    border-color: @border_active;
+    box-shadow: 0 0 transparent;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_active), to(shade (@bg_active, 0.93)));
+}
+
+.button:insensitive {
+    color: @fg_insensitive;
+    border-color: @border_insensitive;
+    box-shadow: 0 0 transparent;
+    box-shadow: inset 1px 0 @lightborder_insensitive,
+                inset -1px 0 @lightborder_insensitive,
+                inset 0 1px @lightborder_insensitive;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_insensitive), to(shade (@bg_insensitive, 0.93)));
+}
+
+
+/******************************************************************************/
+/** GtkCheckButton and GtkRadioButton                                        **/
+/******************************************************************************/
+
+GtkCheckButton:prelight {
+    color: @fg_prelight;
+    border-radius: 2px;
+    background-color: @bg_prelight;
+}
+
+GtkCheckButton.radio:prelight,
+GtkCheckButton.check:prelight {
+    color: @fg_normal;
+    background-color: @base_normal;
+}
+
+GtkCheckButton.radio:prelight {
+    border-radius: 8px;
+}
+
+GtkCheckButton:insensitive,
+GtkCheckButton GtkLabel:insensitive {
+    color: @fg_insensitive;
+    background-color: transparent;
+}
+
+.check {
+    border-radius: 3px;
+}
+
+.radio {
+    border-radius: 8px;
+}
+
+.check,
+.check row:selected,
+.check row:selected:focus {
+    -gtk-icon-source: url("assets/check.png");
+}
+
+.check:insensitive,
+.check row:selected:insensitive,
+.check row:selected:focus:insensitive {
+    -gtk-icon-source: url("assets/check-ins.png");
+}
+
+.check:active, .check:checked,
+.check row:selected:active,
+.check row:selected:focus:active, .check row:selected:focus:checked {
+    -gtk-icon-source: url("assets/check-sel.png");
+}
+
+.check:active:insensitive, .check:checked:insensitive,
+.check row:selected:active:insensitive, .check row:selected:checked:insensitive,
+.check row:selected:focus:active:insensitive, .check row:selected:focus:checked:insensitive {
+    -gtk-icon-source: url("assets/check-ins-sel.png");
+}
+
+.check,
+.radio {
+    color: @fg_selected;
+    border-style: solid;
+    border-width: 1px;
+    border-color: @border_normal;
+    background-color: @base_normal;
+}
+
+.radio:active,
+.radio:checked,
+.radio row:selected:active,
+.radio row:selected:focus:active,
+.radio row:selected:focus:checked,
+.check:active,
+.check:checked,
+.check row:selected:active,
+.check row:selected:focus:active,
+.check row:selected:focus:checked {
+    border-color: @lightborder_prelight;
+    background-color: @bg_selected;
+}
+
+.check:insensitive,
+.radio:insensitive {
+    color: @border_insensitive;
+    border-color: @border_insensitive;
+    background-color: @bg_normal;
+}
+ 
+.radio,
+.radio row:selected,
+.radio row:selected:focus {
+    -gtk-icon-source: url("assets/radio.png");
+}
+
+.radio:insensitive,
+.radio row:selected:insensitive,
+.radio row:selected:focus:insensitive {
+    -gtk-icon-source: url("assets/radio-ins.png");
+}
+
+.radio:active, .radio:checked,
+.radio row:selected:active, .radio row:selected:checked,
+.radio row:selected:focus:active, .radio row:selected:focus:checked {
+    -gtk-icon-source: url("assets/radio-sel.png");
+}
+
+.radio:active:insensitive, .radio:checked:insensitive,
+.radio row:selected:active:insensitive, .radio row:selected:checked:insensitive,
+.radio row:selected:focus:active:insensitive, .radio row:selected:focus:checked:insensitive {
+    -gtk-icon-source: url("assets/radio-ins-sel.png");
+}
+
+
+/******************************************************************************/
+/** GtkToggleButton                                                          **/
+/******************************************************************************/
+
+.button:checked,
+.linked .button:checked,
+.linked .button:checked:hover,
+.linked .button:checked:active,
+.linked .button:checked:active:first-child,
+.linked .button:checked:active:last-child,
+.header-bar .button.text-button:checked,
+.header-bar .button.image-button:checked,
+.header-bar .button.text-button:checked:hover,
+.header-bar .button.image-button:checked:hover,
+.header-bar .button.text-button:checked:active,
+.header-bar .button.image-button:checked:active,
+.header-bar .button.text-button:checked:active:hover,
+.header-bar .button.image-button:checked:active:hover,
+.header-bar .button.text-button:checked:active:first-child,
+.header-bar .button.image-button:checked:active:first-child,
+.header-bar .button.text-button:checked:active:last-child,
+.header-bar .button.image-button:checked:active:last-child,
+.toolbar .button:checked {
+    color: @button_toggled_text;
+    border-color: @border_active;
+    box-shadow: none;
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@bg_active), to(shade (@bg_active, 0.93)));
+}
+
+.header-bar .button.text-button:checked:active,
+.header-bar .button.image-button:checked:active{
+    border-left-width: 1px;
+}
+
+.header-bar .button.text-button:checked:active:last-child,
+.header-bar .button.image-button:checked:active:last-child{
+    border-left-width: 0px;
+}
+
+.button:checked:insensitive {
+    border-color: @border_insensitive;
+    box-shadow: none;
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@bg_insensitive), to(shade (@bg_insensitive, 0.93)));
+}
+
+
+/******************************************************************************/
+/** GtkLinkButton                                                            **/
+/******************************************************************************/
+
+GtkLinkButton.button,
+GtkScaleButton.button {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: 0 0 transparent;
+    background-image: none;
+    color: @link_color;
+}
+
+GtkLinkButton.button:prelight {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: 0 0 transparent;
+    background-image: none;
+}
+
+
+/******************************************************************************/
+/** GtkMenuButton                                                            **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkLockButton                                                            **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkSpinButton                                                            **/
+/******************************************************************************/
+
+.spinbutton .button {
+    border-width:  0px;
+    border-radius: 0px;
+    border-width: 1px 2px 0px 1px;
+    border-color: @lightborder_normal;
+    box-shadow: 1px 0 @border_normal,
+                -1px 0 @border_normal,
+                0 1px @border_normal,
+                0 -1px @border_normal;  
+}
+
+.spinbutton .button:last-child {
+    border-width: 1px 1px 0px 1px;
+    border-color: @lightborder_normal;
+    border-right-color: @border_normal;
+    border-radius: 0 3px 3px 0;
+    box-shadow: 1px 0 @border_normal,
+                -1px 0 @border_normal,
+                0 1px @border_normal,
+                0 -1px @border_normal;
+}
+
+.spinbutton .button:insensitive {
+    border-width: 1px 2px 0px 1px;
+    border-color: @lightborder_insensitive;
+    box-shadow: 1px 0 @border_insensitive,
+                -1px 0 @border_insensitive,
+                0 1px @border_insensitive,
+                0 -1px @border_insensitive; 
+}
+
+.spinbutton .button:hover {
+    border-width: 1px 2px 0px 1px;
+    border-color: @lightborder_prelight;
+    box-shadow: 1px 0 @border_prelight,
+                -1px 0 @border_prelight,
+                0 1px @border_prelight,
+                0 -1px @border_prelight;
+}
+
+.spinbutton .button:last-child:insensitive {
+    border-width: 1px 1px 0px 1px;
+    border-color: @lightborder_insensitive;
+    border-right-color: @border_insensitive;
+    box-shadow: 1px 0 @border_insensitive,
+                -1px 0 @border_insensitive,
+                0 1px @border_insensitive,
+                0 -1px @border_insensitive; 
+}
+
+.spinbutton .button:last-child:hover {
+    border-width: 1px 1px 0px 1px;
+    border-color: @lightborder_prelight;
+    border-right-color: @border_prelight;
+    box-shadow: 1px 0 @border_prelight,
+                -1px 0 @border_prelight,
+                0 1px @border_prelight,
+                0 -1px @border_prelight;
+}
+
+.spinbutton.entry {
+    border-width:  1px 0 1px 1px;
+    border-radius: 2px 3px 3px 2px;
+}
+
+.spinbutton.vertical .button {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    background-color: @bg_normal;
+    border-color: @border_normal;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+.spinbutton.vertical .button:hover {
+    color: @fg_prelight;
+    background-color: @bg_prelight;
+    border-color: @border_prelight;
+    box-shadow: inset 1px 0 @lightborder_prelight,
+                inset -1px 0 @lightborder_prelight,
+                inset 0 1px @lightborder_prelight;
+}
+
+
+.spinbutton.vertical .button:insensitive {
+    color: @fg_insensitive;
+    background-color: @bg_insensitive;
+    border-color: @border_insensitive;
+    box-shadow: 0 0 transparent;
+    box-shadow: inset 1px 0 @lightborder_insensitive,
+                inset -1px 0 @lightborder_insensitive,
+                inset 0 1px @lightborder_insensitive;
+}
+
+.spinbutton.vertical .button:first-child {
+    border-width: 1px 1px 0 1px;
+    border-radius: 3px 3px 0 0;
+}
+
+.spinbutton.vertical .button:last-child {
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 3px 3px;
+}
+
+.spinbutton.vertical.entry {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0;
+}
+
+
+/******************************************************************************/
+/** GtkColorButton                                                           **/
+/******************************************************************************/
+
+GtkColorButton.button {
+    padding: 5px 20px 5px 20px;
+}
+
+
+/******************************************************************************/
+/** GtkSwitch                                                                **/
+/******************************************************************************/
+
+GtkSwitch {
+    font: bold condensed;
+    color: @text_normal;
+    padding: 2px;
+}
+
+GtkSwitch:insensitive {
+    color: @text_insensitive;
+}
+
+GtkSwitch.trough {
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: @trough_border;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@trough_bg), to(shade (@trough_bg, 0.9)));
+}
+
+GtkSwitch.trough:insensitive {
+    border-color: @trough_border_insensitive;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@trough_bg_insensitive), to(shade (@trough_bg_insensitive, 0.9)));
+}
+
+GtkSwitch.trough:active {
+    color: @bg_normal;
+    border-color: @trough_border;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@progressbar_fill), to(shade (@progressbar_fill, 0.9)));
+}
+
+GtkSwitch.slider {
+    padding: 2px;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: @slider_border;
+    box-shadow: inset 1px 0 @slider_lightborder,
+                inset -1px 0 @slider_lightborder,
+                inset 0 1px @slider_lightborder;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@slider_bg), to(shade (@slider_bg, 0.93)));
+}
+
+GtkSwitch.slider:prelight {
+    border-color: @slider_border_prelight ;
+    box-shadow: inset 1px 0 @slider_lightborder_prelight,
+                inset -1px 0 @slider_lightborder_prelight,
+                inset 0 1px @slider_lightborder_prelight;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@slider_bg_prelight), to(shade (@slider_bg_prelight, 0.93)));
+}
+
+GtkSwitch.slider:active {
+    padding: 2px 5px 2px 2px;
+}
+
+GtkSwitch.slider:insensitive {
+    border-color: @slider_border_insensitive;
+    box-shadow: inset 1px 0 @slider_lightborder_insensitive,
+                inset -1px 0 @slider_lightborder_insensitive,
+                inset 0 1px @slider_lightborder_insensitive;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@slider_bg_insensitive), to(shade (@slider_bg_insensitive, 0.93)));
+}
+
+
+/******************************************************************************/
+/** GtkComboBox                                                              **/
+/******************************************************************************/
+
+GtkComboBox .separator,
+GtkComboBox .separator:prelight,
+GtkComboBox .separator:insensitive {
+    border-color: transparent;
+}
+
+GtkComboBox *:prelight {
+    color: @fg_prelight;
+}
+
+GtkComboBox *:insensitive {
+    color: @fg_insensitive;
+}
+
+GtkComboBox.combobox-entry *:insensitive {
+    color: @text_insensitive;
+}
+
+GtkComboBox.combobox-entry .entry,
+GtkComboBox.combobox-entry .entry:prelight {
+    border-radius: 2px 0 0 2px;
+    border-right-style: none;
+    padding: 0 2px 0 2px;
+}
+
+GtkComboBox.combobox-entry .button {
+    padding: 0;
+    border-radius: 0 2px 2px 0;
+}
+
+
+/******************************************************************************/
+/** GtkComboBoxText                                                          **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkFontButton                                                            **/
+/******************************************************************************/
+
+GtkFontButton .separator,
+GtkFileChooserButton .separator {
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: @separator_outer;
+    border-left-color: @separator_outer;
+    border-right-color: @separator_inner;
+    border-bottom-color: @separator_inner;
+}
+
+GtkFontButton .separator:prelight,
+GtkFileChooserButton .separator:prelight {
+    border-top-color: shade (@separator_outer, 0.71);
+    border-left-color: shade (@separator_outer, 0.71);
+    border-right-color: shade (@separator_inner, 0.71);
+    border-bottom-color: shade (@separator_inner, 0.71);
+}
+
+GtkFontButton GtkLabel:last-child {
+    padding: 0;
+}
+
+
+/******************************************************************************/
+/** GtkAppChooserButton                                                      **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkVolumeButton                                                          **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkFileChooserButton                                                     **/
+/******************************************************************************/
+

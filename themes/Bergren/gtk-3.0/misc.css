@@ -1,0 +1,179 @@
+/******************************************************************************/
+/** GtkCalendar                                                              **/
+/******************************************************************************/
+
+GtkCalendar {
+    padding: 0;
+}
+
+GtkCalendar:inconsistent {
+    color: shade( @fg_insensitive, 0.75 );
+}
+
+GtkCalendar.view {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: @separator_outer;
+    box-shadow: 1px 1px @separator_inner;
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@base_normal), to(shade (@base_normal, 0.93)));
+}
+
+GtkCalendar.header {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px 3px 0 0;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_color), to(shade (@bg_color, 0.93)));
+    border-color: @separator_outer;
+    box-shadow: 1px 0 @separator_inner,
+                inset 1px 1px @separator_inner;
+}
+
+GtkCalendar.button,
+GtkCalendar.button:insensitive {
+    border-width: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.highlight,
+GtkCalendar.highlight {
+    border-width: 0;
+    background-color: @bg_selected;
+    color: @fg_selected;
+    box-shadow: inset 1px 0 shade (@bg_selected, 0.85),
+                inset 0 1px shade (@bg_selected, 0.85),
+                inset -1px 0 shade (@bg_selected, 0.85),
+                inset 0 -1px shade (@bg_selected, 0.85);
+}
+
+
+/******************************************************************************/
+/** GtkTooltip                                                               **/
+/******************************************************************************/
+
+.tooltip {
+    padding: 0;
+    color: @text_normal;
+    background-color: @bg_normal;
+    border-style: solid;
+    border-width: 1px;
+    border-color: @border_normal;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+
+/******************************************************************************/
+/** GtkPopover                                                               **/
+/******************************************************************************/
+
+GtkPopover {
+    margin: 10px;
+    padding: 2px;
+    border-radius: 2px;
+    border-color: @border_normal;
+    border-width: 1px;
+    border-style: solid;
+    background-clip: border-box;
+    background-color: @bg_normal;
+    color: @fg_normal;
+    box-shadow: 0 2px 3px alpha(black, 0.5);
+}
+
+GtkPopover.osd {
+    box-shadow: 0 2px 7px 3px alpha(black, 0.5);
+}
+
+GtkPopover > .list,
+GtkPopover > .view,
+GtkPopover > .toolbar {
+    background-color: transparent;
+}
+
+GtkPopover.osd > .toolbar .button {
+    border-radius: 0;
+    border-width: 0;
+    background-image: none;
+    background-color: transparent;
+}
+
+GtkPopover .separator {
+    border: 0;
+    background-color: transparent;
+    color: alpha(currentColor, 0.5);
+    font-size: 80%;
+    font-weight: bold;
+}
+
+GtkModelButton.button,
+GtkModelButton.button:active,
+GtkModelButton.button:insensitive,
+GtkModelButton.button:active:insensitive {
+    background-color: transparent;
+    border-color: transparent;
+    border-style: none;
+    box-shadow: none;
+    padding: 0px;
+    background-image: none;
+}
+
+GtkModelButton.button:checked {
+    border-width: 0;
+    border-style: none;
+    box-shadow: 0 0 transparent;
+    background-color: transparent;
+    background-image: none;
+}
+
+GtkModelButton.button:hover:active,
+GtkModelButton.button:hover {
+    border-width: 0;
+    border-style: none;
+    box-shadow: 0 0 transparent;
+    border-radius: 0px;
+    background-color: @bg_selected;
+    color: @fg_selected;
+}
+
+GtkPopover .button.image-button,
+GtkPopover .button.text-button {
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_normal), to(shade (@bg_normal, 0.93)));
+}
+
+GtkPopover .button.image-button:hover,
+GtkPopover .button.text-button:hover {
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_prelight), to(shade (@bg_prelight, 0.93)));
+}
+
+GtkPopover * {
+    padding: 0;
+}
+
+
+/******************************************************************************/
+/** Notify                                                                   **/
+/******************************************************************************/
+
+.notify {
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: alpha (@border_normal, 0.30);
+    background-color: alpha (@bg_normal, 0.95);
+}
+
+.notify .low {
+}
+
+.notify .critical {
+}

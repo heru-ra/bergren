@@ -1,0 +1,539 @@
+/******************************************************************************/
+/** GtkScrolledWindow                                                        **/
+/******************************************************************************/
+
+GtkScrolledWindow.frame {
+    border-radius: 2px;
+    padding: 0px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: transparent;
+    border-color: @border_normal;
+}
+
+GtkScrolledWindow GtkViewport.frame {
+    border-style: none;
+}
+
+
+/******************************************************************************/
+/** GtkHeaderBar                                                             **/
+/******************************************************************************/
+
+.header-bar {
+    border-radius: 0;
+    padding: 4px 4px 6px 4px;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_color), to(shade (@bg_color, 0.93)));
+    box-shadow: inset 0 -1px @separator_outer;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: @separator_inner;
+}
+
+.header-bar .button.text-button {
+}
+
+.header-bar .button.image-button {
+    padding: 4px;
+}
+
+.header-bar .title {
+    font: bold;
+    padding: 0 12px;
+}
+
+.header-bar .subtitle {
+    font: smaller;
+    padding: 0 12px;
+}
+
+.header-bar GtkComboBox,
+.header-bar .button,
+.header-bar .button:hover,
+.header-bar .button:active
+.header-bar .button:hover:active {
+    background-color: transparent;
+    border-style: none;
+    box-shadow: 0 0 transparent;
+    background-image: none;
+}
+
+.header-bar .button:active {
+    color: @fg_normal
+}
+
+.header-bar .button.text-button,
+.header-bar .button.image-button {
+    border-style: solid;
+    border-width: 1px;
+    border-color: @border_normal;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_normal), to(shade (@bg_normal, 0.93)));
+}
+
+.header-bar .button.text-button:hover,
+.header-bar .button.image-button:hover {
+    color: @fg_prelight;
+    border-color: @border_prelight;;
+    box-shadow: inset 1px 0 @lightborder_prelight,
+                inset -1px 0 @lightborder_prelight,
+                inset 0 1px @lightborder_prelight;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_prelight), to(shade (@bg_prelight, 0.93)));
+}
+
+.header-bar .button.text-button:hover:active,
+.header-bar .button.image-button:hover:active
+.header-bar .button.text-button:active,
+.header-bar .button.image-button:active {
+    color: @fg_normal;
+    border-color: @border_active;
+    box-shadow: 0 0 transparent;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_active), to(shade (@bg_active, 0.93)));
+}
+
+.header-bar .entry {
+}
+
+.header-bar .entry:active,
+.header-bar .entry:focus {
+}
+
+
+/******************************************************************************/
+/** GtkSearchBar                                                             **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkActionBar                                                             **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkListBox                                                               **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkFlowBox                                                               **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkStack                                                                 **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkStackSwitcher                                                         **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkStackSidebar                                                          **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkTreeview                                                              **/
+/******************************************************************************/
+
+/** cell and row **/
+
+.cell {
+    border-width: 0;
+    border-radius: 0;
+}
+
+.cell:selected,
+.cell:selected:focus {
+    background-color: @bg_selected;
+    color: @fg_selected;
+}
+
+row:selected,
+row:selected:hover,
+row:selected:focus {
+    -GtkWidget-focus-padding: 1;
+    -GtkWidget-focus-line-width: 0;
+
+    background-color: @bg_selected;
+    color: @fg_selected;
+}
+
+column-header .button {
+    border-radius: 0;
+    padding: 2px 0px 2px 3px;
+    border-width: 0 0 1px 0;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_color), to(shade (@bg_color, 0.93)));
+    border-color: shade (@bg_normal, 0.67);
+    border-right: 1px solid shade (@bg_normal, 0.84);
+    box-shadow: 0 0 transparent;
+}
+
+column-header .button:hover {
+    border-width: 0 0 1px 0;
+    background-color: @bg_prelight;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_prelight), to(shade (@bg_prelight, 0.93)));
+    border-color: shade (@bg_normal, 0.67);
+    border-right: 1px solid shade (@bg_normal, 0.84);
+    box-shadow: 0 0 transparent;
+}
+
+column-header:nth-child(last) .button {
+    border-right: 0px solid transparent;
+}
+
+GtkTreeView column:sorted {
+    background-color: shade (@base_normal, 0.95);
+}
+
+column {
+    box-shadow: inset -1px 0 alpha (@fg_normal, 0.3);
+}
+
+column:last-child {
+    box-shadow: none;
+}
+
+GtkTreeView column-header:sorted .button {
+    color: #FF0000;
+}
+
+
+/******************************************************************************/
+/** GtkIconView                                                              **/
+/******************************************************************************/
+
+GtkViewport,
+GtkIconView {
+    padding: 0;
+    background-color: transparent;
+}
+
+GtkIconView.view.cell:selected,
+GtkIconView.view.cell:selected:focused {
+    background-color: shade (@base_selected, 0.85);
+    border-radius: 3px;
+    color: @text_selected;
+}
+
+.rubberband,
+.view.rubberband {
+    background-color: alpha (@base_selected, 0.35);
+    border-color: alpha (@fg_selected, 0.25);
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+
+/******************************************************************************/
+/** GtkNotebook                                                              **/
+/******************************************************************************/
+
+.notebook {
+    background-color: @bg_normal;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: @separator_outer;
+}
+
+.notebook.frame {
+    box-shadow: none;
+}
+
+.notebook tab {
+    border-radius: 3px;
+    padding: 4px;
+    border-color: @border_insensitive;
+    border-width: 1px 1px 0 1px;
+    box-shadow: none;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_insensitive), to(shade (@bg_insensitive, 0.93)));
+}
+
+.notebook tab:active {
+    background-color: @bg_normal;
+    border-color: @separator_outer;
+    padding: 4px 4px 5px 4px;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+    background-image: none;
+}
+
+.notebook tab.bottom {
+    border-width: 0 1px 1px 1px;
+}
+
+.notebook tab.bottom:active {
+    padding: 5px 4px 4px 4px;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal;
+}
+
+.notebook tab.left {
+    border-width: 1px 0 1px 1px;
+}
+
+.notebook tab.left:active {
+    padding: 4px 5px 4px 4px;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+.notebook tab.right {
+    border-width: 1px 1px 1px 0;
+}
+
+.notebook tab.right:active {
+    padding: 4px 4px 4px 5px;
+    box-shadow: inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+
+/******************************************************************************/
+/** GtkFrame                                                                 **/
+/******************************************************************************/
+
+.frame {
+    padding: 1px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: @separator_outer;
+    box-shadow: 1px 1px @separator_inner,
+    inset 1px 1px @separator_inner;
+}
+
+
+/******************************************************************************/
+/** GtkPaned                                                                 **/
+/******************************************************************************/
+
+.pane-separator.horizontal,
+.pane-separator.horizontal:prelight,
+.pane-separator.horizontal:selected {
+    border-style: solid;
+    border-width: 0 0 0 1px;
+    border-color: @separator_outer;
+    box-shadow: inset 1px 0 @separator_inner;
+    background-image: url("assets/transparent.png");
+}
+
+.pane-separator.vertical,
+.pane-separator.vertical:prelight,
+.pane-separator.vertical:selected {
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    border-color: @separator_outer;
+    box-shadow: inset 0 1px @separator_inner;
+    background-image: url("assets/transparent.png");
+}
+
+
+/******************************************************************************/
+/** GtkMenuBar                                                               **/
+/******************************************************************************/
+
+.menubar {
+    -GtkWidget-window-dragging: true;
+    box-shadow: inset 0 -1px @separator_outer;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: @separator_inner;
+    padding: 1px 2px 1px 2px;
+}
+
+.menubar .menuitem {
+    padding: 4px 6px 3px 6px;
+    border-width: 0px;
+    border-style: none;
+}
+
+.menu .menuitem {
+    padding: 1px 3px 2px 3px;
+}
+
+.menu {
+    padding: 1px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: shade (@border_normal, 1.26);
+}
+
+.menubar.menuitem:active,
+.menubar.menuitem:prelight {
+    background-color: @bg_prelight;
+}
+
+.menuitem:active,
+.menuitem:prelight {
+    background-color: @bg_prelight;
+}
+
+Genericmenuitem .menuitem .accelerator,
+DbusmenuGtkMenu .menuitem .accelerator,
+.menubar .menuitem .accelerator,
+.primary-toolbar .menuitem .accelerator {
+    color: @dim_label;
+}
+
+Genericmenuitem .menuitem .accelerator:prelight,
+DbusmenuGtkMenu .menuitem .accelerator:prelight,
+.menubar .menuitem .accelerator:prelight,
+.primary-toolbar .menuitem .accelerator:prelight {
+    color: shade (@fg_selected, 0.85);
+}
+
+.menu *:insensitive {
+    color: @text_insensitive;
+    background-color: transparent;
+}
+
+.menu .separator {
+    -GtkMenuItem-horizontal-padding: 6;
+    -GtkWidget-separator-height: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: @separator_outer;
+    border-bottom-color: @separator_inner;
+}
+
+
+/******************************************************************************/
+/** GtkToolbar                                                               **/
+/******************************************************************************/
+
+.toolbar {
+    padding: 0 2px 2px 2px;
+    box-shadow: inset 0 -1px @separator_outer;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: @separator_inner;
+}
+
+.toolbar .separator {
+    padding: 5px 0 10px 0;
+}
+
+.toolbar *:insensitive,
+.toolbar .button:insensitive {
+    color: @text_insensitive;
+    border-color: transparent;
+    background-color: @bg_normal;
+    box-shadow: inset 1px 0 transparent,
+                inset -1px 0 transparent,
+                inset 0 1px transparent;
+    background-image: none;
+}
+
+.toolbar .button {
+    padding: 2px;
+    icon-shadow: none;
+    border-color: transparent;
+    box-shadow: none;
+    background-image: none;
+}
+
+/******************************************************************************/
+/** GtkToolPalette                                                           **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkPlacesSidebar                                                         **/
+/******************************************************************************/
+
+.sidebar column-header .button {
+    padding: 3px 0px 2px 1px;
+    border-width: 0 0 1px 0;
+    background-color: @bg_color;
+    border-color: @border_normal;
+    border-right: 1px solid shade (@bg_normal, 0.84);
+}
+.sidebar column {
+    box-shadow: none;
+}
+
+.sidebar,
+.sidebar.view {
+    background-color: @base_normal;
+    border-radius: 0;
+    color: @text_normal;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+    border-color: @border_normal;
+}
+
+.sidebar.view:selected,
+.sidebar.view:prelight:selected {
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color: shade (@bg_selected, 0.9);
+    background-color: @bg_selected ;
+}
+
+.sidebar-pane-separator,
+.sidebar-pane-separator:prelight,
+.sidebar-pane-separator:selected {
+    -GtkPaned-handle-size: 1;
+    border-width: 0;
+    background-image: none;
+    background-color: @bg_normal;
+    border-color: @bg_normal;
+    background-image: none;
+}
+
+.sidebar .separator,
+.sidebar.view .separator {
+    border-style: solid;
+    border-width: 1px;
+    border-color: shade (@base_normal, 0.73);
+    color: shade (@base_normal, 0.80);
+}
+
+
+/******************************************************************************/
+/** GtkExpander                                                              **/
+/******************************************************************************/
+
+.expander {
+    color: @fg_normal;
+}
+
+.expander:active,
+.expander:prelight {
+    border-style: solid;
+    border-width: 1px;
+    border-color: @fg_prelight;
+    color: @fg_prelight;
+    background-color: @fg_prelight;
+}
+
+.expander row:selected,
+.expander row:selected:focused {
+    border-style: solid;
+    border-width: 1px;
+    border-color: @fg_prelight;
+    color: @fg_prelight;
+    background-color: @fg_prelight;
+}

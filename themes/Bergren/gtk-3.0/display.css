@@ -1,0 +1,508 @@
+/******************************************************************************/
+/** GtkLabel                                                                 **/
+/******************************************************************************/
+
+GtkLabel {
+    background-color: transparent;
+}
+
+GtkLabel:insensitive {
+    color: @fg_insensitive;
+    background-color: transparent;
+}
+
+.dim-label {
+    color: @dim_label;
+}
+
+
+/******************************************************************************/
+/** GtkAccelLabel                                                            **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkSpinner                                                               **/
+/******************************************************************************/
+
+@keyframes spinner {
+    to { -gtk-icon-transform: rotate(1turn); }
+}
+
+.spinner {
+    -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
+    color: @spinner;
+    opacity: 0;
+}
+
+.spinner:active {
+    animation: spinner 1s infinite linear;
+    opacity: 1;
+}
+
+.spinner:active:backdrop {
+    color: @spinner;
+}
+
+.spinner:active:insensitive {
+    opacity: 0.5;
+}
+
+.menu.spinner,
+.menu .spinner,
+.menu .spinner:hover,
+.primary-toolbar .spinner {
+    color: @spinner;
+    border: none;
+    box-shadow: none;
+}
+
+
+/******************************************************************************/
+/** GtkStatusBar                                                             **/
+/******************************************************************************/
+
+GtkStatusbar .frame {
+    color: @text_normal;
+    padding: 2px;
+    border-width: 1px;
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@bg_normal), to(shade (@bg_normal, 0.96)));
+}
+
+/* Grip */
+
+.grip {
+    background-color: transparent;
+    background-image: url("assets/grip.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
+/******************************************************************************/
+/** GtkLevelBar                                                              **/
+/******************************************************************************/
+
+GtkLevelBar {
+    -GtkLevelBar-min-block-width: 34;
+    -GtkLevelBar-min-block-height: 4;
+}
+
+GtkLevelBar.vertical {
+    -GtkLevelBar-min-block-width: 2;
+    -GtkLevelBar-min-block-height: 34;
+}
+
+.level-bar.trough {
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: @trough_border_insensitive;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@trough_bg_insensitive), to(shade (@trough_bg_insensitive, 0.9)));
+}
+
+.level-bar.trough.vertical {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@trough_bg_insensitive), to(shade (@trough_bg_insensitive, 0.9)));
+}
+
+.level-bar.fill-block {
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 1px;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@level_continuous_bg), to(shade (@level_continuous_bg, 0.9)));
+}
+
+.level-bar.fill-block.vertical {
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 1px;
+    background-repeat: repeat;
+    background-position: center top;
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@level_continuous_bg), to(shade (@level_continuous_bg, 0.9)));
+}
+
+.level-bar.indicator-continuous.fill-block {
+    padding: 1px;
+}
+
+.level-bar.indicator-discrete.fill-block.horizontal {
+    margin: 0 1px;
+}
+
+.level-bar.indicator-discrete.fill-block.vertical {
+    margin: 1px 0;
+}
+
+.level-bar.fill-block.level-high {
+    border-color: transparent;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@level_high_bg), to(shade (@level_high_bg, 0.9)));
+}
+
+.level-bar.fill-block.level-low {
+    border-color: transparent;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@level_low_bg), to(shade (@level_low_bg, 0.9)));
+}
+
+.level-bar.fill-block.empty-fill-block {
+    border-color: transparent;
+    background-color: transparent;
+    background-image: none;
+}
+
+
+/******************************************************************************/
+/** GtkProgressBar                                                           **/
+/******************************************************************************/
+
+GtkProgressBar {
+    padding: 0px;
+    color: @text_normal;
+}
+
+GtkProgressBar.progressbar,
+.progressbar,
+.entry.progressbar,
+GtkProgressBar.progressbar:selected,
+.progressbar:selected,
+.entry.progressbar:selected {
+    color: @text_normal;
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: @border_normal;
+    background-image: url("assets/progress-fill.png");
+    background-repeat: repeat;
+    background-position: left center;
+}
+
+GtkProgressBar.vertical.progressbar {
+    background-image: url("assets/progress-vert-fill.png");
+    background-repeat: repeat;
+    background-position: center top;
+}
+
+
+GtkProgressBar.trough,
+.progressbar.trough,
+.entry.progressbar.trough {
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: @trough_border;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@trough_bg), to(shade (@trough_bg, 0.9)));
+}
+
+GtkProgressBar.vertical.trough {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@trough_bg), to(shade (@trough_bg, 0.9)));
+}
+
+
+/******************************************************************************/
+/** GtkInfoBar                                                               **/
+/******************************************************************************/
+
+.info GtkLabel,
+.warning GtkLabel,
+.question GtkLabel,
+.error GtkLabel {
+    font: bold;
+    color: @fg_normal;
+}
+
+.info *.button,
+.warning *.button
+.question *.button
+.error *.button {
+    border-style: none;
+    background-image: none;
+    box-shadow: none;
+}
+
+.info {
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@infobar_info_bg), to(shade (@infobar_info_bg, 0.66)));
+}
+
+.warning {
+color: #FF0000
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@infobar_warning_bg), to(shade (@infobar_warning_bg, 0.66)));
+}
+
+.question {
+color: #FF0000
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@infobar_question_bg), to(shade (@infobar_question_bg, 0.66)));
+}
+
+.error {
+color: #FF0000
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@infobar_error_bg), to(shade (@infobar_error_bg, 0.66)));
+}
+
+/******************************************************************************/
+/** GtkScrollbar                                                             **/
+/******************************************************************************/
+
+.scrollbar {
+    -GtkRange-slider-width: 10;
+    -GtkRange-stepper-size: 0;
+    -GtkRange-stepper-spacing: 0;
+    -GtkRange-trough-border: 1;
+    -GtkScrollbar-min-slider-length: 30;
+}
+
+.scrollbar.trough {
+    border-style: solid;
+    border-radius: 0 0 2px 2px;
+    border-width: 1px;
+    background-color: @trough_scroll_bg;
+    border-color: @trough_scroll_border;
+}
+
+.scrollbar.slider {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    background-color: @scrollbar_slider;
+    border-color: shade (@scrollbar_slider, 0.52);
+    background-image: url("assets/scrollbar.png");
+    background-repeat: repeat;
+    background-position: left center;
+}
+
+.scrollbar.vertical.trough {
+    border-radius: 0 2px 2px 0;
+}
+
+.scrollbar.vertical.slider {
+    background-image: url("assets/scrollbar-vert.png");
+    background-repeat: repeat;
+    background-position: center top;
+}
+
+.scrollbar.slider:prelight {
+    background-color: @scrollbar_slider_prelight;
+    border-color: shade (@scrollbar_slider_prelight, 0.52);
+    background-image: url("assets/scrollbar-pre.png");
+    background-repeat: repeat;
+    background-position: left center;
+}
+
+.scrollbar.vertical.slider:prelight {
+    background-image: url("assets/scrollbar-vert-pre.png");
+    background-repeat: repeat;
+    background-position: center top;
+}
+
+.scrollbar.slider:insensitive {
+    -GtkRange-slider-width: 0;
+}
+
+.scrollbar.trough:insensitive {
+    -GtkRange-trough-border: 0;
+    background-color: transparent;
+    border-style: none;
+}
+
+
+/******************************************************************************/
+/** GtkImage                                                                 **/
+/******************************************************************************/
+
+GtkDrawingArea,
+GtkImage,
+GtkImage:insensitive,
+GtkImage:selected,
+GtkDrawingArea:backdrop,
+GtkImage:backdrop,
+GtkImage:insensitive:backdrop,
+GtkImage:selected:backdrop {
+    background-color: transparent;
+}
+
+
+/******************************************************************************/
+/** GtkSeparator                                                             **/
+/******************************************************************************/
+
+.separator {
+    border-style: solid;
+    border-width: 1px;
+    border-top-color: @separator_outer;
+    border-left-color: @separator_outer;
+    border-right-color: @separator_inner;
+    border-bottom-color: @separator_inner;
+}
+
+
+/******************************************************************************/
+/** GtkTextView                                                              **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkScale                                                                 **/
+/******************************************************************************/
+
+GtkScale {
+    -GtkRange-slider-width: 15;
+    -GtkScale-slider-length: 31;
+}
+
+.scale.slider {
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: @slider_border;
+    box-shadow: inset 1px 0 @slider_lightborder,
+                inset -1px 0 @slider_lightborder,
+                inset 0 1px @slider_lightborder;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@slider_bg), to(shade (@slider_bg, 0.93)));
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.scale.slider:prelight {
+    border-color: @slider_border_prelight ;
+    box-shadow: inset 1px 0 @slider_lightborder_prelight,
+                inset -1px 0 @slider_lightborder_prelight,
+                inset 0 1px @slider_lightborder_prelight;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@slider_bg_prelight), to(shade (@slider_bg_prelight, 0.93)));
+}
+
+.scale.slider.vertical:prelight {
+    border-color: @slider_border_prelight ;
+    box-shadow: inset 1px 0 @slider_lightborder_prelight,
+                inset 0 -1px @slider_lightborder_prelight,
+                inset 0 1px @slider_lightborder_prelight;
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@slider_bg_prelight), to(shade (@slider_bg_prelight, 0.93)));
+}
+
+.scale.slider.vertical {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@slider_bg), to(shade (@slider_bg, 0.93)));
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: inset 1px 0 @slider_lightborder,
+                inset 0 -1px @slider_lightborder,
+                inset 0 1px @slider_lightborder;
+}
+
+.scale.slider:insensitive {
+    border-color: @slider_border_insensitive;
+    box-shadow: inset 1px 0 @slider_lightborder_insensitive,
+                inset -1px 0 @slider_lightborder_insensitive,
+                inset 0 1px @slider_lightborder_insensitive;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@slider_bg_insensitive), to(shade (@slider_bg_insensitive, 0.93)));
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.scale.slider.vertical:insensitive {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@slider_bg_insensitive), to(shade (@slider_bg_insensitive, 0.93)));
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: inset 1px 0 @slider_lightborder_insensitive,
+                inset 0 -1px @slider_lightborder_insensitive,
+                inset 0 1px @slider_lightborder_insensitive;
+}
+
+.scale.trough {
+    margin: 6px 0;
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: @trough_border;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@trough_bg), to(shade (@trough_bg, 0.9)));
+}
+
+.scale.trough.vertical {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@trough_bg), to(shade (@trough_bg, 0.9)));
+}
+
+.scale.trough:insensitive {
+    border-color: @trough_border_insensitive;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@trough_bg_insensitive), to(shade (@trough_bg_insensitive, 0.9)));
+}
+
+.scale.trough.vertical:insensitive {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(@trough_bg_insensitive), to(shade (@trough_bg_insensitive, 0.9)));
+}
+
+.menuitem .scale.highlight.left,
+.scale.highlight.left {
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(alpha(@switch_fill, 0.5)), to(alpha (shade (@switch_fill, 0.9), 0.5)));
+    box-shadow: none;
+}
+
+.menuitem .scale.highlight.left:hover {
+}
+
+.scale.highlight.bottom {
+    background-image:   -gtk-gradient (linear,
+                        left center, right center,
+                        from(alpha(@switch_fill, 0.5)), to(alpha (shade (@switch_fill, 0.9), 0.5)));
+    box-shadow: none;
+}
+
+*.mark,
+*.scale-has-marks-below,
+*.scale-has-marks-above {
+    color: @dim_label;
+}
+
+.scale.trough.vertical {
+    margin: 0 6px;
+}
+
+
+/******************************************************************************/
+/** GtkGLArea                                                                **/
+/******************************************************************************/

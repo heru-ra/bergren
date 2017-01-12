@@ -1,0 +1,156 @@
+#******************************************************************************#
+#** Theme:  Bergren                                                          **#
+#** Author: heru-ra                                                          **#
+#** Source: temporarily blank                                                **#
+#******************************************************************************#
+
+
+#******************************************************************************#
+#** Basic Color Scheme                                                       **#
+#******************************************************************************#
+
+gtk-color-scheme            = "bg_color:#374244\nselected_bg_color:#59666e\nbase_color:#686c70"     # background, base
+gtk-color-scheme            = "fg_color:#BDBDBD\nselected_fg_color:#d3c2aa\ntext_color:#BDBDBD"     # foreground, text
+gtk-color-scheme            = "link_color:#eab56b"                                                  # hyperlinks
+
+
+#******************************************************************************#
+#** Default Widget Style                                                     **#
+#******************************************************************************#
+
+style "theme-default"
+{
+    fg[NORMAL]              = @fg_color
+    fg[ACTIVE]              = @fg_color
+    fg[INSENSITIVE]         = mix (0.4, @fg_color, shade (0.85, @bg_color))     #shaded to bg[INSENSITIVE]
+    fg[PRELIGHT]            = @selected_fg_color
+    fg[SELECTED]            = @selected_fg_color
+        
+    bg[NORMAL]              = @bg_color
+    bg[ACTIVE]              = shade (0.9, @bg_color)
+    bg[INSENSITIVE]         = shade (0.95, @bg_color)
+    bg[PRELIGHT]            = shade (1.0, @selected_bg_color)
+    bg[SELECTED]            = @selected_bg_color
+
+    base[NORMAL]            = @base_color
+    base[ACTIVE]            = shade (1.0, @selected_bg_color)
+    base[INSENSITIVE]       = shade (0.95, @base_color)
+    base[PRELIGHT]          = @bg_color
+    base[SELECTED]          = shade(0.85, @selected_bg_color)
+        
+    text[NORMAL]            = @text_color
+    text[ACTIVE]            = @text_color
+    text[INSENSITIVE]       = mix (0.5, @text_color, @base_color)
+    text[PRELIGHT]          = @text_color
+    text[SELECTED]          = @selected_fg_color
+
+    GtkButton           ::child-displacement-x              = 1
+    GtkButton           ::child-displacement-y              = 1
+    GtkButton           ::default-border                    = { 0, 0, 0, 0 }
+
+    xthickness                                              = 1
+    ythickness                                              = 1
+
+    engine "murrine"
+    {
+        animation               = FALSE
+        arrowstyle              = 2                     # 0 = normal arrows, 1 = filled arrows      
+        border_shades           = { 1.0, 1.0 }          # gradient to draw on border
+        #cellstyle               = 0
+        colorize_scrollbar      = FALSE     
+        comboboxstyle           = 0                     # 0 = normal combobox, 1 = colorized combobox below arrow       
+        contrast                = 1.0                   # 0.8 for less contrast, more than 1.0 for more contrast on borders
+        #expanderstyle          = 1
+        #focus_color             = mix (0.1, @bg_color, shade (1.1, @selected_bg_color))
+        focusstyle              = 0
+        glazestyle              = 0                     # 0 = flat highlight, 1 = curved highlight, 2 = concave style, 3 = top curved highlight, 4 = beryl highlight
+        gradient_shades         = {1.0,1.0,1.0,1.0}
+        glowstyle               = 4                     # 0,1,2,3,4
+        glow_shade              = 1.0
+        handlestyle             = 0
+        highlight_shade         = 1.0                   # set highlight amount for buttons or widgets
+        lightborder_shade       = 1.4                   # sets lightborder amount for buttons or widgets
+        lightborderstyle        = 0                     # 0 = lightborder on top side, 1 = lightborder on all sides
+        listviewheaderstyle     = 2                     # 0 = flat, 1 = glassy, 2 = raised
+        listviewstyle           = 2                     # 0 = nothing, 1 = dotted
+        menubaritemstyle        = 0                     # 0 = menuitem look, 1 = button look
+        menubarstyle            = 0                     # 0 = flat, 1 = glassy, 2 = gradient, 3 = striped
+        menuitemstyle           = 0                     # 0 = flat, 1 = glassy, 2 = striped
+        menustyle               = 0                     # 0 = no vertical menu stripe, 1 = display vertical menu stripe
+        prelight_shade          = 1.0                   # shade level for scrollbar's slider, comboboxstyle(1), and prelight state with gradient_colors     
+        reliefstyle             = 0                     # 0 = flat, 1 = inset, 2 = shadow
+        rgba                    = FALSE                 # FALSE = disabled, TRUE = enabled
+        roundness               = 2                     # 0 = squared, 1 = old default, more will increase roundness
+        scrollbarstyle          = 3                     # 0 = nothing, 1 = circles, 2 = handles, 3 = diagonal stripes, 4 = diagonal stripes and handles, 5 = horizontal stripes, 6 = horizontal stripes and handles
+        separatorstyle          = 0                     # 0 = Hard seperators 1 = Smooth seperators
+        sliderstyle             = 0                     # 0 = nothing added, 1 = handles
+        #stepperstyle           = 0                     # 0 = standard, 1 = integrated stepper handles, 2 = unknown
+        progressbarstyle        = 1                     # 0 = nothing, 1 = stripes, 2 = lines
+        focus_color             = @selected_bg_color
+        shadow_shades           = { 0.6, 0.6 }          # gradient for shadows.     
+        textstyle               = 0                     # 0 = normal text, 1 = inset        
+        toolbarstyle            = 0                     # 0 = flat, 1 = glassy, 2 = gradient        
+        trough_shades           = { 1.0, 1.0 }          # draw gradient on trough of GtkScrollbar and GtkProgressbar
+        trough_border_shades    = { 1.0, 1.0 }
+    }
+}
+
+
+#******************************************************************************#
+#** Extended Widget Styles                                                   **#
+#******************************************************************************#
+
+style "notify-window" = "theme-default"
+{
+    XfceNotifyWindow::summary-bold = 1
+    XfceNotifyWindow::border-color = shade (0.45, @bg_color)
+    XfceNotifyWindow::border-color-hover = shade (0.45, @bg_color)
+    XfceNotifyWindow::border-radius = 6.0
+    XfceNotifyWindow::border-width = 1
+    XfceNotifyWindow::border-width-hover = 1
+    bg[NORMAL] = shade (0.85, @bg_color)
+    engine "murrine" {
+        gradient_shades         = {1.0,1.0,1.0,0.87}
+    }
+}
+
+style "notify-button" = "theme-default"
+{
+    bg[NORMAL] = shade (0.95, @bg_color)
+    engine "murrine" {
+        gradient_shades         = {1.0,1.0,1.0,0.87}
+    }
+}
+
+style "notify-text" = "theme-default"
+{
+    GtkWidget::link-color = @link_color
+}
+
+style "notify-summary" = "theme-default"
+{
+    font_name = "Bold"
+}
+
+style "notify-progressbar" = "theme-default"
+{
+    bg[PRELIGHT] = @fg_color
+    bg[SELECTED] = shade ( 0.8, @selected_fg_color )
+    bg[NORMAL]   = @base_color
+    fg[PRELIGHT] = shade ( 1.2, @selected_bg_color )
+    
+    engine "murrine"
+    {
+        border_shades       = { 1.32, 1.32}
+        lightborder_shade       = 1.0
+        shadow_shades       = { 0.8, 0.8 }
+        gradient_shades     = {1.0,1.0,1.0,0.87}
+    }
+}
+
+class "XfceNotifyWindow" style "notify-window"
+widget "XfceNotifyWindow.*.summary" style "notify-summary"
+widget_class "XfceNotifyWindow.*<GtkButton>" style "notify-button"
+widget_class "XfceNotifyWindow.*.<GtkLabel>" style "notify-text"
+widget_class "XfceNotifyWindow.*.<GtkProgress>" style "notify-progressbar"
+widget_class "XfceNotifyWindow.*.<GtkProgressBar>" style "notify-progressbar"

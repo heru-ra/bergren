@@ -1,0 +1,155 @@
+/******************************************************************************/
+/** GtkWindow                                                                **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkMessageDialog                                                         **/
+/******************************************************************************/
+
+GtkMessageDialog,
+.prompt {
+    -GtkDialog-content-area-border: 8;
+    -GtkDialog-action-area-border: 8;
+    -GtkDialog-button-spacing: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/******************************************************************************/
+/** GtkAboutDialog                                                           **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkAssistant                                                             **/
+/******************************************************************************/
+
+GtkAssistant .sidebar .highlight {
+    font: bold;
+}
+
+GtkAssistant .sidebar {
+    padding: 2px;
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    border-right-color: #FF0000;
+    border-radius: 0;
+    background-color: #00FF00;
+    color: #0000FF;
+}
+
+
+/******************************************************************************/
+/** GtkColorChooserDialog                                                    **/
+/******************************************************************************/
+
+GtkColorChooserWidget .scale {
+    -GtkScale-slider-length: 15;
+    -GtkRange-slider-width: 15;
+    -GtkRange-trough-border: 0;
+}
+
+GtkColorChooserWidget .scale.slider,
+GtkColorChooserWidget .scale.slider:prelight {
+    border-style: solid;
+    border-width: 1px;
+    background-color: transparent;
+    border-radius: 10px;
+    border-color: @border_normal;
+    background-image: none;
+}
+
+GtkColorChooserWidget .scale.slider.vertical {
+    background-image: none;
+}
+
+GtkColorSwatch {
+    border-radius: 0;
+}
+
+GtkColorSwatch.left,
+GtkColorSwatch:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+GtkColorSwatch.right,
+GtkColorSwatch:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+GtkColorSwatch:only-child {
+    border-radius: 2px;
+}
+
+GtkColorSwatch.top {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+GtkColorSwatch.bottom {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+GtkColorChooserWidget #add-color-button {
+    border-style: solid;
+    border-width: 1px;
+    border-color: shade (@border_normal, 1.26);
+    background-color: shade(@bg_normal, 0.95);
+    color: @fg_normal;
+}
+
+GtkColorChooserWidget #add-color-button:hover {
+    border-color: shade (@border_normal, 1.16);
+    background-color: shade(@bg_normal, 0.90);
+    color: @fg_selected;
+}
+
+.color-active-badge,
+.color-active-badge:selected {
+    background-color: transparent;
+}
+
+
+GtkColorEditor GtkColorSwatch {
+    border-radius: 2px;
+}
+
+
+/******************************************************************************/
+/** GtkFileChooserDialog                                                     **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkRecentChooserDialog                                                   **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkFontChooserDialog                                                     **/
+/******************************************************************************/
+
+GtkFontChooserDialog column {
+    box-shadow: none;
+}
+
+
+/******************************************************************************/
+/** GtkAppChooserDialog                                                      **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkPageSetupUnixDialog                                                   **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** GtkPrintUnixDialog                                                       **/
+/******************************************************************************/

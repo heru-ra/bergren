@@ -1,0 +1,42 @@
+/******************************************************************************/
+/** GtkEntry                                                                 **/
+/******************************************************************************/
+
+.entry {
+    border-style:solid;
+    border-width: 1px;
+    border-color: shade (@border_normal, 1.26);
+    border-radius: 2px;
+    padding: 2px;
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@base_normal), to(shade (@base_normal, 0.93)));
+}
+
+.entry:insensitive {
+    color: @text_insensitive;
+}
+
+.security_trusted {
+    padding: 2px; 
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@base_normal), to(shade (@base_normal, 0.93)));
+}
+
+.security_unknown {
+    padding: 2px;
+    background-image:   -gtk-gradient (linear,
+                        center bottom, center top,
+                        from(@base_normal), to(shade (@base_normal, 0.93)));
+}
+
+.entry.image {
+    padding: 2px;
+}
+
+
+/******************************************************************************/
+/** GtkSearchEntry                                                           **/
+/******************************************************************************/
+

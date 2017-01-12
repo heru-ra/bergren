@@ -1,0 +1,454 @@
+/******************************************************************************/
+/** The Universal Basics                                                     **/
+/******************************************************************************/
+
+* {
+    -GtkArrow-arrow-scaling: 0.75;
+
+    -GtkButton-child-displacement-x: 0;
+    -GtkButton-child-displacement-y: 0;
+    -GtkButton-default-border: 0;
+    -GtkButton-image-spacing: 0;
+    -GtkButton-inner-border: 1;
+    -GtkButton-interior-focus: true;
+    -GtkButtonBox-child-min-height: 24;
+    -GtkButtonBox-child-internal-pad-y: 1;
+
+    -GtkCheckButton-indicator-size: 13;
+    -GtkCheckButton-indicator-spacing: 2;
+    -GtkCheckMenuItem-indicator-size: 13;
+
+    -GtkComboBox-arrow-scaling: 0.5;
+    -GtkComboBox-shadow-type: none;
+
+    -GtkEntry-progress-border: 0;
+
+    -GtkExpander-expander-size: 10; 
+
+    -GtkMenuBar-internal-padding: 1;
+    -GtkMenu-horizontal-padding: 0;
+    -GtkMenu-vertical-padding: 0;
+    -GtkMenu-horizontal-offset: -4;
+    -GtkMenu-vertical-offset: 4;
+    -GtkMenuItem-toggle-spacing: 7;
+    -GtkMenuItem-arrow-scaling: 0.6;
+
+    -GtkNotebook-tab-overlap: -1px;
+
+    -GtkPaned-handle-size: 5px;
+
+    -GtkScrolledWindow-scrollbar-spacing: 0;
+    -GtkScrolledWindow-scrollbars-within-bevel: 0;
+
+    -GtkStatusbar-shadow-type: none;
+
+    -GtkTextView-error-underline-color: #AE4551;
+
+    -GtkToolButton-icon-spacing: 6;
+    -GtkToolItemGroup-expander-size: 11;
+    -GtkToolbar-internal-padding: 0;
+
+    -GtkTreeView-vertical-separator: 4;
+    -GtkTreeView-horizontal-separator: 2;
+    -GtkTreeView-expander-size: 8;
+
+    -GtkWidget-focus-padding: 0;
+
+    -GtkWidget-wide-separators: true;
+    -GtkWidget-separator-width: 2px;
+    -GtkWidget-separator-height: 2px;
+
+    -GtkWidget-link-color: @link_color;
+    -GtkWidget-visited-link-color: @visited_link_color;
+    -GtkIMHtml-hyperlink-color: @link_color;
+    -GtkHTML-link-color: @link_color;
+
+    -GtkWidget-focus-line-width: 0;
+}
+
+/* Widget/Object Base */
+
+.background {
+    color: @text_normal;
+    padding: 1px;
+    background-image:   -gtk-gradient (linear,
+                        center top, center bottom,
+                        from(@bg_normal), to(shade (@bg_normal, 0.96)));
+}
+
+*:insensitive {
+    color: @fg_insensitive;
+    background-color: @bg_insensitive;
+}
+
+*:selected,
+*:selected:focused {
+    color: @fg_selected;
+    background-color: shade (@bg_selected, 0.85);
+}
+
+/* Selected Text */
+
+.button *:prelight,
+.button.noundo *:prelight,
+.expander row:selected,
+.expander row:selected:focused,
+.help_button *:prelight,
+.menubar *:active,
+.menubar *:prelight,
+.menu *:active,
+.menu *:prelight,
+.sidebar.view:selected {
+    color: @fg_selected;
+}
+
+
+/* View */
+
+.view {
+    background-color: @base_normal;
+}
+
+.view:selected {
+    background-color: shade (@base_selected, 0.85)
+}
+
+
+/******************************************************************************/
+/** Linked Buttons                                                           **/
+/******************************************************************************/
+/**                                                                          **/
+/** GTK3 makes use of linked buttons, and we want to style them so that      **/
+/** they look fluid. This needs to be done before we do any other styling    **/
+/** of other button-related widgets.                                         **/
+/**                                                                          **/
+/******************************************************************************/
+ 
+/* set up shadows for visual separation */
+.linked .button,
+.inline-toolbar.toolbar .button,
+.inline-toolbar.toolbar GtkToolButton .button,
+.inline-toolbar.toolbar GtkToolButton > .button {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    background-color:         @bg_normal;
+    border-color: @border_normal;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+.linked .button:insensitive,
+.inline-toolbar.toolbar .button:insensitive,
+.inline-toolbar.toolbar GtkToolButton .button:insensitive,
+.inline-toolbar.toolbar GtkToolButton > .button:insensitive {
+    color: @fg_insensitive;
+    background-color: @bg_insensitive;
+    border-color: @border_insensitive;
+    box-shadow: 0 0 transparent;
+    box-shadow: inset 1px 0 @lightborder_insensitive,
+                inset -1px 0 @lightborder_insensitive,
+                inset 0 1px @lightborder_insensitive;
+}
+
+/* middle button */
+.linked .entry,
+.linked .button,
+.linked .button:active,
+.linked .button:insensitive,
+.inline-toolbar.toolbar .button,
+.inline-toolbar.toolbar .button:active,
+.inline-toolbar.toolbar .button:insensitive,
+.inline-toolbar.toolbar GtkToolButton .button,
+.inline-toolbar.toolbar GtkToolButton .button:active,
+.inline-toolbar.toolbar GtkToolButton .button:insensitive {
+    border-width: 1px;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-color: @separator_outer;
+    box-shadow: inset 1px 0 @separator_inner,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_normal;;
+}
+
+.linked .button:hover,
+.inline-toolbar.toolbar .button:hover,
+.inline-toolbar.toolbar GtkToolButton .button:hover {
+    border-right-color: @separator_outer;
+    background-color: @bg_prelight;
+    box-shadow: inset 1px 0 transparent,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_prelight;
+}
+
+.linked .button:active:hover,
+.inline-toolbar.toolbar .button:active:hover,
+.inline-toolbar.toolbar GtkToolButton .button:active:hover {
+    border-color: @border_active;
+    box-shadow: none;
+}
+
+/*leftmost button */
+.linked .entry:first-child,
+.linked .button:first-child,
+.linked .button:active:first-child,
+.linked .button:active:hover:first-child,
+.linked .button:insensitive:first-child,
+.inline-toolbar.toolbar .button:first-child,
+.inline-toolbar.toolbar .button:active:first-child,
+.inline-toolbar.toolbar .button:insensitive:first-child,
+.inline-toolbar.toolbar GtkToolButton:first-child .button,
+.inline-toolbar.toolbar GtkToolButton:first-child .button:active,
+.inline-toolbar.toolbar GtkToolButton:first-child .button:insensitive {
+    border-width: 1px;
+    border-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right-color: @separator_outer;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_normal;
+}
+
+.linked .button:first-child:hover,
+.linked .button:active:first-child:hover,
+.inline-toolbar.toolbar .button:first-child:hover,
+.inline-toolbar.toolbar .button:active:first-child:hover,
+.inline-toolbar.toolbar GtkToolButton:first-child .button:hover,
+.inline-toolbar.toolbar GtkToolButton:first-child .button:active:hover {
+    background-color: @bg_prelight;
+    border-right-color: @separator_outer;
+    box-shadow: inset 1px 0 @lightborder_prelight,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_prelight;
+}
+
+.linked .button:first-child:hover:active,
+.linked .button:active:first-child:hover:active,
+.inline-toolbar.toolbar .button:first-child:hover:active,
+.inline-toolbar.toolbar .button:active:first-child:hover:active,
+.inline-toolbar.toolbar GtkToolButton:first-child .button:active:hover {
+    box-shadow: none;
+}
+
+/* rightmost button */
+.linked .entry:last-child,
+.linked .button:last-child,
+.linked .button:active:last-child,
+.linked .button:active:hover:last-child,
+.linked .button:insensitive:last-child,
+.inline-toolbar.toolbar .button:last-child,
+.inline-toolbar.toolbar .button:active:last-child,
+.inline-toolbar.toolbar .button:insensitive:last-child,
+.inline-toolbar.toolbar GtkToolButton:last-child .button,
+.inline-toolbar.toolbar GtkToolButton:last-child .button:active,
+.inline-toolbar.toolbar GtkToolButton:last-child .button:insensitive {
+    border-width: 1px;
+    border-radius: 3px;
+    border-left-width: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    box-shadow: inset 1px 0 @separator_inner,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+.linked .button:last-child:hover,
+.linked .button:active:last-child:hover,
+.inline-toolbar.toolbar .button:last-child:hover,
+.inline-toolbar.toolbar .button:active:last-child:hover,
+.inline-toolbar.toolbar GtkToolButton:last-child .button:hover,
+.inline-toolbar.toolbar GtkToolButton:last-child .button:active:hover {
+    border-color: @border_prelight;
+    background-color: @bg_prelight;
+    box-shadow: inset 1px 0 transparent,
+                inset -1px 0 @lightborder_prelight,
+                inset 0 1px @lightborder_prelight;
+}
+
+.linked .button:last-child:hover:active,
+.linked .button:active:last-child:hover:active,
+.inline-toolbar.toolbar .button:last-child:hover:active,
+.inline-toolbar.toolbar .button:active:last-child:hover:active
+.inline-toolbar.toolbar GtkToolButton:last-child .button:active:hover {
+    border-color: @border_active;
+    box-shadow: none;
+}
+
+/* linked single button */
+.linked .entry:only-child,
+.linked .button:only-child,
+.linked .button:active:only-child,
+.linked .button:active:hover:only-child,
+.linked .button:insensitive:only-child,
+.inline-toolbar.toolbar .button:only-child,
+.inline-toolbar.toolbar .button:active:only-child,
+.inline-toolbar.toolbar .button:insensitive:only-child,
+.inline-toolbar.toolbar GtkToolButton:only-child .button,
+.inline-toolbar.toolbar GtkToolButton:only-child .button:active,
+.inline-toolbar.toolbar GtkToolButton:only-child .button:insensitive {
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+.header-bar .button.raised.linked:insensitive,
+.header-bar .raised.linked .button:insensitive,
+.header-bar .linked .button:insensitive {
+    color: @fg_insensitive;
+    background-color: @bg_insensitive;
+    border-color: @border_insensitive;
+    box-shadow: 0 0 transparent;
+    box-shadow: inset 1px 0 @lightborder_insensitive,
+                inset -1px 0 @lightborder_insensitive,
+                inset 0 1px @lightborder_insensitive;
+}
+
+
+/* middle button */
+.header-bar .button.raised.linked,
+.header-bar .button.raised.linked:active,
+.header-bar .button.raised.linked:insensitive,
+.header-bar .raised.linked .button,
+.header-bar .raised.linked .button:active,
+.header-bar .raised.linked .button:insensitive,
+.header-bar .linked .button,
+.header-bar .linked .button:active,
+.header-bar .linked .button:insensitive {
+    border-width: 1px;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-color: @separator_outer;
+    box-shadow: inset 1px 0 @separator_inner,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_normal;
+}
+
+.header-bar .button.raised.linked:hover,
+.header-bar .button.raised.linked:active:hover,
+.header-bar .raised.linked .button:hover,
+.header-bar .raised.linked .button:active:hover,
+.header-bar .linked .button:hover,
+.header-bar .linked .button:active:hover {
+    border-right-color: @separator_outer;
+    background-color: @bg_prelight;
+    box-shadow: inset 1px 0 transparent,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_prelight;
+}
+
+/* leftmost button */
+.header-bar .button.raised.linked:first-child,
+.header-bar .button.raised.linked:active:first-child,
+.header-bar .button.raised.linked:insensitive:first-child,
+.header-bar .raised.linked .button:first-child,
+.header-bar .raised.linked .button:active:first-child,
+.header-bar .raised.linked .button:insensitive:first-child,
+.header-bar .linked .button:first-child,
+.header-bar .linked .button:active:first-child,
+.header-bar .linked .button:insensitive:first-child {
+    border-width: 1px;
+    border-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right-color: @separator_outer;
+    box-shadow: inset 1px 0 @lightborder_normal,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_normal;
+}
+
+.header-bar .button.raised.linked:first-child:hover,
+.header-bar .button.raised.linked:active:first-child:hover,
+.header-bar .raised.linked .button:first-child:hover,
+.header-bar .raised.linked .button:active:first-child:hover,
+.header-bar .linked .button:first-child:hover,
+.header-bar .linked .button:active:first-child:hover {
+    background-color: @bg_prelight;
+    border-right-color: @separator_outer;
+    box-shadow: inset 1px 0 @lightborder_prelight,
+                inset -1px 0 transparent,
+                inset 0 1px @lightborder_prelight;
+}
+
+.header-bar .button.raised.linked:first-child:hover:active,
+.header-bar .button.raised.linked:active:first-child:hover:active,
+.header-bar .raised.linked .button:first-child:hover:active,
+.header-bar .raised.linked .button:active:first-child:hover:active,
+.header-bar .linked .button:first-child:hover:active,
+.header-bar .linked .button:active:first-child:hover {
+    box-shadow: none;
+}
+
+
+/* rightmost button */
+.header-bar .button.raised.linked:last-child,
+.header-bar .button.raised.linked:active:last-child,
+.header-bar .button.raised.linked:insensitive:last-child,
+.header-bar .raised.linked .button:last-child,
+.header-bar .raised.linked .button:active:last-child,
+.header-bar .raised.linked .button:insensitive:last-child,
+.header-bar .linked .button:last-child,
+.header-bar .linked .button:active:last-child,
+.header-bar .linked .button:insensitive:last-child {
+    border-width: 1px;
+    border-radius: 3px;
+    border-left-width: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    box-shadow: inset 1px 0 @separator_inner,
+                inset -1px 0 @lightborder_normal,
+                inset 0 1px @lightborder_normal;
+}
+
+.header-bar .button.raised.linked:hover:last-child,
+.header-bar .raised.linked .button:hover:last-child,
+.header-bar .linked .button:hover:last-child {
+    border-color: @border_prelight;
+    background-color: @bg_prelight;
+    box-shadow: inset 1px 0 transparent,
+                inset -1px 0 @lightborder_prelight,
+                inset 0 1px @lightborder_prelight;
+}
+
+.header-bar .button.raised.linked:hover:last-child:active,
+.header-bar .raised.linked .button:hover:last-child:active,
+.header-bar .linked .button:hover:last-child:active {
+    box-shadow: none;
+}
+
+/* linked single button */
+.header-bar .button.raised.linked:only-child,
+.header-bar .button.raised.linked:active:only-child,
+.header-bar .button.raised.linked:insensitive:only-child,
+.header-bar .raised.linked .button:only-child,
+.header-bar .raised.linked .button:active:only-child,
+.header-bar .raised.linked .button:insensitive:only-child,
+.header-bar .linked .button:only-child,
+.header-bar .linked .button:active:only-child,
+.header-bar .linked .button:insensitive:only-child {
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+/******************************************************************************/
+/** Include Individual Widget/Object Styles                                  **/
+/******************************************************************************/
+/**                                                                          **/
+/** For learning and organizational purposes, most GTK3 widgets have been    **/
+/** grouped and labeled, according to the following GNOME DEVELOPER gallery: **/
+/**                                                                          **/
+/** https://developer.gnome.org/gtk3/stable/ch03.html                        **/
+/**                                                                          **/
+/** If you are intending to modify a specific widget or visual element, use  **/
+/** the above gallery as a visual reference, then open the according .css    **/
+/** file and find the appropriate section.                                   **/
+/**                                                                          **/
+/******************************************************************************/
+
+@import url("buttons.css");
+@import url("entries.css");
+@import url("containers.css");
+@import url("windows.css");
+@import url("misc.css");
+
+@import url("display.css");

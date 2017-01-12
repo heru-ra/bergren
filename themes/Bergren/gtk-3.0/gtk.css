@@ -1,0 +1,116 @@
+/******************************************************************************/
+/** Theme:  Bergren                                                          **/
+/** Author: heru-ra                                                          **/
+/** Source: temporarily blank                                                **/
+/******************************************************************************/
+
+
+/******************************************************************************/
+/** Basic Color Scheme                                                       **/
+/******************************************************************************/
+
+@define-color bg_color #374244;
+@define-color fg_color #BDBDBD;
+@define-color base_color #686c70;
+@define-color text_color #BDBDBD;
+@define-color selected_fg_color #d3c2aa;
+@define-color selected_bg_color #59666e;
+
+@define-color tooltip_bg_color #374244;
+@define-color tooltip_fg_color #BDBDBD;
+
+@define-color button_toggled_text #BDBDBD;
+
+@define-color link_color #eab56b;
+@define-color visited_link_color #eab56b;
+
+@define-color progressbar_fill #b39d7e;
+@define-color switch_fill #b39d7e;
+@define-color spinner #b39d7e;
+
+@define-color scrollbar_slider #6e6250;
+@define-color scrollbar_slider_prelight #7a6b55;
+
+@define-color infobar_info_bg #70bc66;
+@define-color infobar_warning_bg #c1a561;
+@define-color infobar_question_bg #7780c4;
+@define-color infobar_error_bg #bc6670;
+
+@define-color level_continuous_bg #7780c4;
+@define-color level_high_bg #70bc66;
+@define-color level_low_bg #c1a561;
+
+@define-color transparent alpha (#FFF, 0.00);
+
+
+/******************************************************************************/
+/** Extended Color Scheme                                                    **/
+/******************************************************************************/
+
+@define-color fg_normal @fg_color;
+@define-color fg_active  @fg_color;
+@define-color fg_insensitive mix (@fg_color, shade (@bg_color, 0.85), 0.65);
+@define-color fg_prelight @selected_fg_color;
+@define-color fg_selected @selected_fg_color;
+        
+@define-color bg_normal @bg_color;
+@define-color bg_active shade (@bg_color, 0.9);
+@define-color bg_insensitive shade (@bg_color, 0.95);
+@define-color bg_prelight @selected_bg_color;
+@define-color bg_selected @selected_bg_color;
+
+@define-color base_normal @base_color;
+@define-color base_active @selected_bg_color;
+@define-color base_insensitive shade (@base_color, 0.95);
+@define-color base_prelight @bg_color;
+@define-color base_selected @selected_bg_color;
+        
+@define-color text_normal @text_color;
+@define-color text_active @text_color;
+@define-color text_insensitive mix (@text_color, @base_color, 0.5);
+@define-color text_prelight @text_color;
+@define-color text_selected @selected_fg_color;
+
+@define-color border_normal shade (@bg_normal, 0.67);
+@define-color border_active shade (@bg_normal, 0.57);
+@define-color border_insensitive shade (@bg_normal, 0.81);
+@define-color border_prelight shade (@bg_prelight, 0.71);
+
+@define-color lightborder_normal shade (@bg_normal, 1.2);
+@define-color lightborder_active shade (@bg_active, 1.2);
+@define-color lightborder_insensitive shade (@bg_insensitive, 1.2);
+@define-color lightborder_prelight shade (@bg_prelight, 1.2);
+@define-color lightborder_selected shade (@bg_selected, 1.2);
+
+/* affects dim-label, accelerator (menu), mark (scale) */
+@define-color dim_label shade (@text_normal, 0.6);
+
+/* affects frame, separator, menu, statusbar, toolbar */
+@define-color separator_inner shade (@bg_normal, 1.06);
+@define-color separator_outer shade (@bg_normal, 0.82);
+
+/* affects scale, switch */
+@define-color slider_bg @bg_selected;
+@define-color slider_bg_insensitive shade (@bg_normal, 0.89);
+@define-color slider_bg_prelight shade (@bg_prelight, 1.1);
+@define-color slider_border shade (@bg_selected, 0.8);
+@define-color slider_border_insensitive shade (@bg_normal, 0.74);
+@define-color slider_border_prelight shade (@bg_prelight, 0.8);
+@define-color slider_lightborder shade (@bg_selected, 1.2);
+@define-color slider_lightborder_insensitive shade (@bg_insensitive, 1.05);
+@define-color slider_lightborder_prelight shade (@bg_prelight, 1.32);
+
+/* affects progressbar, scale, switch */
+@define-color trough_bg shade (@bg_normal, 0.89);
+@define-color trough_border shade (@bg_normal, 0.74);
+@define-color trough_bg_insensitive shade (@bg_normal, 0.95);
+@define-color trough_border_insensitive shade (@bg_normal, 0.81);
+@define-color trough_scroll_bg shade (@bg_normal, 0.98);
+@define-color trough_scroll_border shade (@bg_normal, 0.83);
+
+
+/******************************************************************************/
+/** Include Base Widget/Object Styles                                        **/
+/******************************************************************************/
+
+@import url("gtk-widgets.css");
