@@ -445,10 +445,9 @@
 /**                                                                          **/
 /******************************************************************************/
 
+@import url("display.css");
 @import url("buttons.css");
 @import url("entries.css");
 @import url("containers.css");
 @import url("windows.css");
 @import url("misc.css");
-
-@import url("display.css");

@@ -256,6 +256,7 @@ GtkLinkButton.button:prelight {
 /******************************************************************************/
 
 .spinbutton .button {
+    color: @fg_normal;
     border-width:  0px;
     border-radius: 0px;
     border-width: 1px 2px 0px 1px;
@@ -278,6 +279,7 @@ GtkLinkButton.button:prelight {
 }
 
 .spinbutton .button:insensitive {
+    color: @fg_insensitive;
     border-width: 1px 2px 0px 1px;
     border-color: @lightborder_insensitive;
     box-shadow: 1px 0 @border_insensitive,
@@ -287,6 +289,7 @@ GtkLinkButton.button:prelight {
 }
 
 .spinbutton .button:hover {
+    color: @fg_prelight;
     border-width: 1px 2px 0px 1px;
     border-color: @lightborder_prelight;
     box-shadow: 1px 0 @border_prelight,

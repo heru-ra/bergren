@@ -230,9 +230,17 @@ GtkProgressBar.vertical.trough {
 }
 
 .info *.button,
-.warning *.button
-.question *.button
-.error *.button {
+.warning *.button,
+.question *.button,
+.error *.button,
+.info *.button:hover,
+.warning *.button:hover,
+.question *.button:hover,
+.error *.button:hover,
+.info *.button:hover:active,
+.warning *.button:hover:active,
+.question *.button:hover:active,
+.error *.button:hover:active {
     border-style: none;
     background-image: none;
     box-shadow: none;
