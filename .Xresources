@@ -1,0 +1,67 @@
+! terminal colors ----------------------------------------------------------------------------------
+
+*background: #374244
+*foreground: #dddddd
+
+! black
+*color0: #374244
+*color8: #374244
+
+! red
+*color1: #bc6670
+*color9: #daabb1
+
+! green
+*color2: #70bc66
+*color10: #b1daab
+
+! yellow
+*color3: #c1a561
+*color11: #ddcda8
+
+! blue
+*color4: #7780c4
+*color12: #b4b9de
+
+! magenta
+*color5: #b266bc
+*color13: #d5abda
+
+! cyan
+*color6: #88cbc3
+*color14: #bee2de
+
+! white
+*color7: #d4d4d4
+*color15: #f4f4f4
+
+! terminal settings --------------------------------------------------------------------------------
+
+URxvt.font: xft:Audimat Mono:size=8
+URxvt.letterSpace: -1
+URxvt.scrollBar: false
+
+! rofi settings ------------------------------------------------------------------------------------
+
+rofi.color-enabled: true
+rofi.color-window: #374244, #374244, #374244
+rofi.color-normal: #374244, #bdbdbd, argb:21686c70, #59666e, #d3c2aa
+rofi.color-active: #374244, #b5bae1, argb:21686c70, #59666e, #b5bae1
+rofi.color-urgent: #374244, #e1b5ba, argb:21686c70, #59666e, #e1b5ba
+rofi.hide-scrollbar: true
+rofi.font: Audimat Mono 15
+rofi.separator-style: solid
+rofi.line-margin: 0
+rofi.padding: 400
+rofi.bw: 2
+rofi.width: 100
+rofi.opacity: 97
+
+! font settings ------------------------------------------------------------------------------------
+
+Xft.autohint: true
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
