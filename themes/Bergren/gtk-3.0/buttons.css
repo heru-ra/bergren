@@ -488,6 +488,10 @@ GtkComboBox.combobox-entry .entry:prelight {
     padding: 0 2px 0 2px;
 }
 
+GtkComboBox.combobox-entry .entry:selected {
+    color: @fg_selected;
+}
+
 GtkComboBox.combobox-entry .button {
     padding: 0;
     border-radius: 0 2px 2px 0;
