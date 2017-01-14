@@ -211,7 +211,6 @@ style "separator-menu-item" = "theme-default"
     }
 }
 
-
 style "menu" = "theme-default"
 {
     ythickness = 0
@@ -225,23 +224,6 @@ style "menu" = "theme-default"
         gradient_shades         = {1.0,1.0,1.0,0.87}
     }
 } 
-
-style "entry"
-{
-    xthickness = 3
-    ythickness = 3
-    bg[SELECTED] = mix(0.35, @selected_bg_color, @base_color)
-    fg[SELECTED] = @selected_fg_color
-    
-    engine "murrine"
-    {
-        contrast    = 0.4
-        focus_color = mix (0.1, @bg_color, shade (0.8, @selected_bg_color))
-        reliefstyle = 0
-        border_shades   = {1.03,0.8}
-        roundness               = 2
-    }
-}
 
 style "progress-bar" = "theme-default"
 {
@@ -340,6 +322,32 @@ style "toolbar" = "theme-default"
     }
 }
 
+style "text-area" = "theme-default"
+{
+    text[NORMAL]            = shade (1.2, @text_color)
+    fg[NORMAL]            = shade (1.2, @text_color)
+    engine "murrine" 
+    {
+    }
+}
+
+style "entry" = "text-area"
+{
+    xthickness = 3
+    ythickness = 3
+    bg[SELECTED] = mix(0.35, @selected_bg_color, @base_color)
+    fg[SELECTED] = @selected_fg_color
+    
+    engine "murrine"
+    {
+        contrast    = 0.4
+        focus_color = mix (0.1, @bg_color, shade (0.8, @selected_bg_color))
+        reliefstyle = 0
+        border_shades   = {1.03,0.8}
+        roundness               = 2
+    }
+}
+
 class "GtkWidget"                           style "theme-default"
 class "GtkWindow*"                          style "window"
 class "GtkToolbar"                          style "toolbar"
@@ -364,8 +372,13 @@ widget_class "*.<GtkTreeView>.<GtkButton>"  style "treeview-header"
 widget_class "*.<GtkCTree>.<GtkButton>"     style "treeview-header"
 widget_class "*.<GtkList>.<GtkButton>"      style "treeview-header"
 widget_class "*.<GtkCList>.<GtkButton>"     style "treeview-header"
+widget_class "*.<GtkCMCTree>.<GtkButton>"   style "treeview-header" # Claws-Mail treeview-headers
+widget_class "*.<GtkCMCList>.<GtkButton>"   style "treeview-header" # Claws-Mail treeview-headers
 widget_class "*GnmSimpleCanvas*"            style "treeview-header" # Gnumeric treeview-headers
 
+widget_class "*.<GtkTextView>"              style "text-area"
+widget_class "*<GtkTreeView>"               style "text-area"
+widget_class "*GtkSCTree*"                  style "text-area" # Claws-Mail mailbox list, read messages
 
 #******************************************************************************#
 #** Hacks and Workarounds                                                    **#

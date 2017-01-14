@@ -8,6 +8,7 @@
 }
 
 .button {
+    color: @fg_normal;
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
@@ -245,7 +246,6 @@ GtkLinkButton.button:prelight {
 /** GtkMenuButton                                                            **/
 /******************************************************************************/
 
-
 /******************************************************************************/
 /** GtkLockButton                                                            **/
 /******************************************************************************/
@@ -386,12 +386,12 @@ GtkColorButton.button {
 
 GtkSwitch {
     font: bold condensed;
-    color: @text_normal;
+    color: @fg_normal;
     padding: 2px;
 }
 
 GtkSwitch:insensitive {
-    color: @text_insensitive;
+    color: @fg_insensitive;
 }
 
 GtkSwitch.trough {
@@ -482,6 +482,7 @@ GtkComboBox.combobox-entry *:insensitive {
 
 GtkComboBox.combobox-entry .entry,
 GtkComboBox.combobox-entry .entry:prelight {
+    color: @text_normal;
     border-radius: 2px 0 0 2px;
     border-right-style: none;
     padding: 0 2px 0 2px;

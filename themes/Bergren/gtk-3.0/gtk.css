@@ -65,10 +65,10 @@
 @define-color base_prelight @bg_color;
 @define-color base_selected @selected_bg_color;
         
-@define-color text_normal @text_color;
-@define-color text_active @text_color;
+@define-color text_normal shade (@text_color, 1.2);
+@define-color text_active shade (@text_color, 1.2);
 @define-color text_insensitive mix (@text_color, @base_color, 0.5);
-@define-color text_prelight @text_color;
+@define-color text_prelight shade (@text_color, 1.2);
 @define-color text_selected @selected_fg_color;
 
 @define-color border_normal shade (@bg_normal, 0.67);
@@ -83,7 +83,7 @@
 @define-color lightborder_selected shade (@bg_selected, 1.2);
 
 /* affects dim-label, accelerator (menu), mark (scale) */
-@define-color dim_label shade (@text_normal, 0.6);
+@define-color dim_label shade (@fg_normal, 0.6);
 
 /* affects frame, separator, menu, statusbar, toolbar */
 @define-color separator_inner shade (@bg_normal, 1.06);

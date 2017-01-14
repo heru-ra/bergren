@@ -63,7 +63,7 @@ GtkLabel:insensitive {
 /******************************************************************************/
 
 GtkStatusbar .frame {
-    color: @text_normal;
+    color: @fg_normal;
     padding: 2px;
     border-width: 1px;
     background-image:   -gtk-gradient (linear,
@@ -172,7 +172,7 @@ GtkLevelBar.vertical {
 
 GtkProgressBar {
     padding: 0px;
-    color: @text_normal;
+    color: @fg_normal;
 }
 
 GtkProgressBar.progressbar,
@@ -181,7 +181,7 @@ GtkProgressBar.progressbar,
 GtkProgressBar.progressbar:selected,
 .progressbar:selected,
 .entry.progressbar:selected {
-    color: @text_normal;
+    color: @fg_normal;
     border-style: solid;
     border-radius: 2px;
     border-width: 1px;
@@ -373,6 +373,9 @@ GtkImage:selected:backdrop {
 /** GtkTextView                                                              **/
 /******************************************************************************/
 
+.frame GtkTextView {
+    color: shade (@text_normal, 1.2);
+}
 
 /******************************************************************************/
 /** GtkScale                                                                 **/

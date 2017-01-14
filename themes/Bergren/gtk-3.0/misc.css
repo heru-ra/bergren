@@ -4,10 +4,11 @@
 
 GtkCalendar {
     padding: 0;
+    color: @text_normal;
 }
 
 GtkCalendar:inconsistent {
-    color: shade( @fg_insensitive, 0.75 );
+    color: shade( @fg_insensitive, 1.4 );
 }
 
 GtkCalendar.view {
@@ -22,6 +23,7 @@ GtkCalendar.view {
 }
 
 GtkCalendar.header {
+    color: @fg_normal;
     border-width: 1px;
     border-style: solid;
     border-radius: 3px 3px 0 0;
@@ -51,6 +53,10 @@ GtkCalendar.highlight {
                 inset 0 -1px shade (@bg_selected, 0.85);
 }
 
+GtkCalendar.view.top {
+    color: #FF0000;
+}
+
 
 /******************************************************************************/
 /** GtkTooltip                                                               **/
@@ -58,7 +64,7 @@ GtkCalendar.highlight {
 
 .tooltip {
     padding: 0;
-    color: @text_normal;
+    color: @fg_normal;
     background-color: @bg_normal;
     border-style: solid;
     border-width: 1px;

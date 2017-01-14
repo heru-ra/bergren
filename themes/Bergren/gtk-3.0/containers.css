@@ -157,8 +157,10 @@ GtkScrolledWindow GtkViewport.frame {
 
 .cell:selected,
 .cell:selected:focus {
-    background-color: @bg_selected;
-    color: @fg_selected;
+}
+
+row {
+    color: @text_normal;
 }
 
 row:selected,
@@ -168,7 +170,7 @@ row:selected:focus {
     -GtkWidget-focus-line-width: 0;
 
     background-color: @bg_selected;
-    color: @fg_selected;
+    color: @text_selected;
 }
 
 column-header .button {
@@ -210,10 +212,6 @@ column:last-child {
     box-shadow: none;
 }
 
-GtkTreeView column-header:sorted .button {
-    color: #FF0000;
-}
-
 
 /******************************************************************************/
 /** GtkIconView                                                              **/
@@ -229,7 +227,7 @@ GtkIconView.view.cell:selected,
 GtkIconView.view.cell:selected:focused {
     background-color: shade (@base_selected, 0.85);
     border-radius: 3px;
-    color: @text_selected;
+    color: @fg_selected;
 }
 
 .rubberband,
@@ -405,7 +403,7 @@ DbusmenuGtkMenu .menuitem .accelerator:prelight,
 }
 
 .menu *:insensitive {
-    color: @text_insensitive;
+    color: @fg_insensitive;
     background-color: transparent;
 }
 
@@ -437,7 +435,7 @@ DbusmenuGtkMenu .menuitem .accelerator:prelight,
 
 .toolbar *:insensitive,
 .toolbar .button:insensitive {
-    color: @text_insensitive;
+    color: @fg_insensitive;
     border-color: transparent;
     background-color: @bg_normal;
     box-shadow: inset 1px 0 transparent,
