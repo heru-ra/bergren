@@ -1,0 +1,13 @@
+This is a locking script for i3lock-color, that monitors xscreensaver's blanking status.
+
+When your screensaver activates, it will take a picture of your desktop, blur it,
+and change the color overlay (currently set to match Bergren theme colors).
+
+Once the screensaver is woken, it will display the lock screen.
+
+It is intended to be ran at the start of your session.
+
+Install mx-lock.sh to /usr/local/bin/
+Install lock.png to /usr/local/share/mx-lock/
+
+Don't forget to chmod +x mx-lock.sh

@@ -1,0 +1,50 @@
+#!/bin/bash
+# ----------
+# i3lock-color script, that monitors xscreensaver blanking
+# intended to be ran at start of session
+
+xscreensaver-command -watch | while read -r line; do
+    if [[ $line =~ ^BLANK ]]; then
+        # right before screensaver kicks on, take a picture of the desktop and
+        #blur it, for use when we lock the screen later
+        scrot '/tmp/screenshot.png' -q 40 -e 'convert /tmp/screenshot.png -fill "#374244" -blur 0x10 -colorize 90% /tmp/screenshotblur.png'
+        # below code snippet borrowed from /u/LimpingLlama on Reddit, to make
+        # our lock icon display properly on multi-monitor setups
+        if [[ -f /usr/local/share/mx-lock/lock.png ]]; then
+            # placement x/y
+            PX=0
+            PY=0
+            # lockscreen image info
+            R=$(file /usr/local/share/mx-lock/lock.png | grep -o '[0-9]* x [0-9]*')
+            RX=$(echo $R | cut -d' ' -f 1)
+            RY=$(echo $R | cut -d' ' -f 3)
+         
+            SR=$(xrandr --query | grep ' connected' | sed 's/primary //' | cut -f3 -d' ')
+            for RES in $SR; do
+                # monitor position/offset
+                SRX=$(echo $RES | cut -d'x' -f 1)                   # x pos
+                SRY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 1)  # y pos
+                SROX=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 2) # x offset
+                SROY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 3) # y offset
+                PX=$(($SROX + $SRX/2 - $RX/2))
+                PY=$(($SROY + $SRY/2 - $RY/2))
+         
+                convert /tmp/screenshotblur.png /usr/local/share/mx-lock/lock.png -geometry +$PX+$PY -composite /tmp/screenshotblur.png
+            done
+        fi 
+    fi
+    if [[ $line =~ ^UNBLANK ]]; then
+        # we've woken up from our screensaver, time to lock the screen
+        i3lock -s -i /tmp/screenshotblur.png \
+        --insidevercolor=b1daab00 \
+        --insidewrongcolor=daabb100 \
+        --insidecolor=dddddd00 \
+        --ringvercolor=b4b9de30 \
+        --ringwrongcolor=daabb180 \
+        --ringcolor=dddddd10 \
+        --textcolor=dddddd00 \
+        --separatorcolor=dddddd00 \
+        --keyhlcolor=ddddddaa \
+        --bshlcolor=ddcda880 &
+    fi
+done
