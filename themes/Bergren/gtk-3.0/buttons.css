@@ -489,7 +489,7 @@ GtkComboBox.combobox-entry .entry:prelight {
 }
 
 GtkComboBox.combobox-entry .entry:selected {
-    color: @fg_selected;
+    color: @text_selected;
 }
 
 GtkComboBox.combobox-entry .button {
