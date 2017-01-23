@@ -1,0 +1,31 @@
+This is my current lemonbar script. It (in it's current configuration) requires
+the https://github.com/krypt-n/bar fork of lemonbar, along with conky.
+
+The script is very flexibl and even monitors xrandr, dynamically adjusting itself
+to the addition, removal, or modification of screens and screensize.
+
+It is also designed to be used with herbstluft, however this could probably
+easily be modified to be compatible with i3 or other windows managers. The
+modifications you would need to make would be in lemonbar-launch,
+specifically regarding the padding routine, and also the way it queries the
+current workspace names.
+
+In addition, I also modified the apt-notifier program included with my MX-16
+(Debian) distro, so that it could be used to pipe the number of package updates
+that are currently available for upgrade. I have included the modified apt-notifier.py
+file, which you can use if you choose to. If not, then remove the related routines
+from both lemonbar-launch and lemonbar_parser.sh.
+
+The config and conky files will be created the first time you run the
+scripts, in ~/.config/lemonbar
+
+The script initially assumes you placed the lemonbar_parser.sh file in the dir:
+    /usr/local/share/lemonbar/
+    
+-- HOWEVER, if you wish the place it elsewhere in the long run, you can alter the
+parser="" line in the created ~/.config/lemonbar/lemonbar.conf file, to point to
+whatever alternate location you wish to place the parser script.
+
+Don't forget to chmod +x lemonbar-launch
+    chmod +x lemonbar_parser.sh
+    chmod +x apt-notifier.py
