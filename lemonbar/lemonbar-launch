@@ -1,50 +1,95 @@
 #!/bin/bash
 #
+# lemonbar-launch
+#
+# Author:       heru-ra
+# Source:       https://github.com/heru-ra/
+#
+# Description:  A flexible and reliable lemonbar script, allowing for easy
+#               customization without having to alter long lines of code
+#
+################################################################################
+
+# IT'S A TRAP
+trap 'exit' INT TERM QUIT EXIT
+
+
+## TERM OUTPUT COLORS/FORMAT ## ################################################
+
+# colors
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+NC=$(tput sgr0) # No Color
+
+# used in stylizing lines of output
+PRE=$(echo -n '* '; tput bold) # general
+PREX=$(echo -n '! '; tput bold) # errors and exclamations
+PREHF=$(echo -n '> '; tput bold) # headers and footers
+POST=$(tput sgr0) # reset/clear
+
+
+## DEFAULT CONFIG CONTENT ## ###################################################
 
 # default config file text, used if no pre-existing one is found.
 fresh_config='#!/bin/bash
+#
+# lemonbar-launch config
 #
 
 # config
 panel_fifo="/tmp/lemonbar_heru"
 parser="/usr/local/share/lemonbar/lemonbar_parser.sh"
-height="20"
-pos_x="0"
-pos_y="12"
-font="Audimat Mono:style=Regular:size=7:dpi=96:antialias=true"
-highlightfont="Audimat Mono:style=BoldOblique:size=7:dpi=96:antialias=true"
-iconfont="FontAwesome:size=8:dpi=96:antialias=true"
+
+# geometry and padding, in px
+bar_height=12
+bar_x=0
+bar_y=12
+bar_horizontal_padding=20
+
+# fonts, in xft format
+font="Audimat Mono:style=Regular:size=9:antialias=true"
+font_highlight="Audimat Mono:style=BoldOblique:size=9:antialias=true"
+font_decoration="FreeMono:style=Bold:size=11:antialias=true"
+font_icon="FontAwesome:size=9:antialias=true"
+
+# sound card
 snd_card=1
 snd_channel="PCM"
 
-# colors 
-color_back="#00374244"              # Default background
-color_fore="#FFDDDDDD"              # Default foreground
-color_sec_b1="#BB374244"            # Background for section 1
-color_sec_b2="#99374244"            # Background for section 2
-color_icon="#FFc1a561"              # For icons
+# colors, in argb format
+color_background="#00374244"                # Default background
+color_foreground="#FFd8d3d0"                # Default foreground
+color_element_background="#00374244"        # Background for bar elements
+color_highlight_foreground="#FFd8d3d0"      # Foreground for highlighted elements (example: active workspace name)
+color_icon="#FFd3bda6"                      # For icons
 
-# space between bar elements
-stab="%{O10}"
+# element spacing and decorations
+element_spacing=12                          # in px
+decoration_start=""
+decoration_end=""
+decoration_separator=""
 
 # icons
 icon_updates=""
 icon_wifi=""
-icon_clock=""                      # Clock icon
-icon_vol_low="%{O3}"               # Volume low icon, plus padding to keep alignment
-icon_vol_high=""                   # Volume high icon
-icon_vol_mute="%{O5}"              # Volume muted icon, plus padding to keep alignment
+icon_clock=""                              # Clock icon
+icon_vol_low="%{O3}"                       # Volume low icon, plus padding to keep alignment
+icon_vol_high=""                           # Volume high icon
+icon_vol_mute="%{O5}"                      # Volume muted icon, plus padding to keep alignment
 icon_bat_low=""
 icon_bat_half=""
 icon_bat_high=""
-icon_bat_full=""                # Battery full icon
+icon_bat_full=""
 
-# hotspot configs
-right_click_cmd[0]="urxvt -e nmtui"
-right_click_cmd[1]="pavucontrol"
-right_click_cmd[2]="xfce4-power-manager-settings"
-right_click_cmd[3]="gsimplecal"
-right_click_cmd[4]="python /usr/bin/apt-notifier.py show"'
+# hotspot commands
+right_click_cmd[0]="urxvt -e nmtui"                             # wifi
+right_click_cmd[1]="pavucontrol"                                # volume
+right_click_cmd[2]="xfce4-power-manager-settings"               # battery
+right_click_cmd[3]="gsimplecal"                                 # clock
+right_click_cmd[4]="python /usr/bin/apt-notifier.py show"       # updates'
 
 # default conky config text, used if no pre-existing one is found.
 fresh_conky='background yes
@@ -65,157 +110,206 @@ ${battery_percent BAT1} \
 ${wireless_essid wlan0} \
 ${wireless_link_qual_perc wlan0} \'
 
-# if we can't find a config file, create one using above defaults
-if [ ! -e $HOME/.config/lemonbar/lemonbar.conf ]; then
-    printf "%s\n" "${fresh_config}" > $HOME/.config/lemonbar/lemonbar.conf
-    sleep 1s
-fi
 
-# if we can't find a conky file, create one using above defaults
-if [ ! -e $HOME/.config/lemonbar/lemonbar_conky ]; then
-    printf "%s\n" "${fresh_conky}" > $HOME/.config/lemonbar/lemonbar_conky
-    sleep 1s
-fi
+## FUNCTIONS ## ################################################################
 
-# load config values
-. $HOME/.config/lemonbar/lemonbar.conf
+function file_check() {
+    # create dir if doesn't exist
+    mkdir -p $HOME/.config/lemonbar
+    
+    # if we can't find a config file, create one using above defaults
+    if [ ! -e $HOME/.config/lemonbar/lemonbar.conf ]; then
+        printf "%s\n" "${fresh_config}" > $HOME/.config/lemonbar/lemonbar.conf
+        sleep 1s
+    fi
 
-# is lemonbar-launch already running?
-if [ $(pgrep -cx $(basename $0)) -gt 1 ]; then
-    printf "%s" "The status bar is already running." >&2
-    exit 1
-fi
+    # if we can't find a conky file, create one using above defaults
+    if [ ! -e $HOME/.config/lemonbar/lemonbar_conky ]; then
+        printf "%s\n" "${fresh_conky}" > $HOME/.config/lemonbar/lemonbar_conky
+        sleep 1s
+    fi
 
-# IT'S A TRAP
-trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+    # load config file values
+    . $HOME/.config/lemonbar/lemonbar.conf
 
-# initialize our fifo pipe
-[ -e "${panel_fifo}" ] && rm "${panel_fifo}"
-mkfifo "${panel_fifo}"
-
-# conky (CKY)
-conky -c $HOME/.config/lemonbar/lemonbar_conky > "${panel_fifo}" &
+    # if we can't find the parser file at the 
+    if [ ! -e ${parser} ]; then
+        printf "%s\n" "  ${PREX}${RED}Could not locate parser file at:${POST} ${parser}" \
+            "  ${PREX}${RED}Please change config file to reflect the proper location of parser file${POST}"
+        exit
+    fi
+}
 
 # function to correctly pad our screens, based upon config values
 function pad_it() {
-    tmp=0
+    screen_number=0
     while read line; do
+        printf "%s\n" "  ${PRE}${BLUE}Padding screen: ${screen_number}${POST}"
         # figure out our current herbstluft padding
-        current_pad=$(herbstclient list_padding ${tmp} | awk '{print $1}')
-        vertical_pad=$(($height+$pos_y))
+        current_pad=$(herbstclient list_padding ${screen_number} | awk '{print $1}')
+        vertical_pad=$(($bar_height+$bar_y))
         # pad herbst properly, according to our bar dimensions and config
         if [[ $current_pad != $vertical_pad ]]; then
-            herbstclient pad $tmp $vertical_pad 0 0 0
+            herbstclient pad $screen_number $vertical_pad 0 0 0
         fi
-        let tmp=$tmp+1
+        let screen_number=$screen_number+1
     done < <(herbstclient list_monitors | awk '{print $1}')
 }
 
 # function that launches lemonbar, piped with fifo info from loops below
 function pipe_it() {
+    # pad our screens
+    pad_it &
+
+    printf "%s\n" "  ${PRE}${BLUE}Starting pipe${POST}"
     # loop the fifo pipe
-    cat "${panel_fifo}" | ${parser} \
-        | lemonbar -p -f "${font}" -f "${highlightfont}" -f "${iconfont}" -g "${geometry}" -B "${color_back}" -F "${color_fore}" -a "${#right_click_cmd[@]}" | sh &
+    cat "${panel_fifo}" | ${parser} | \
+        lemonbar -p -f "${font}" -f "${font_highlight}" -f "${font_icon}" -f "${font_decoration}" \
+        -g "${geometry}" -B "${color_background}" -F "${color_foreground}" -a "${#right_click_cmd[@]}" | sh &
 }
 
 function check_updates() {
-    # available package updates
-    num_updates=0
-    num_updates=$(python /usr/bin/apt-notifier.py updates)
-    printf "%s%s\n" "UPDATES" "$num_updates" > "${panel_fifo}"
+    status_check=$(cat /tmp/update_status)
+    if [[ ${status_check} == "0" ]]; then
+        echo "1" > /tmp/update_status
+        printf "%s\n" "  ${PRE}${BLUE}Checking package updates${POST}"
+        # available package updates
+        num_updates=0
+        num_updates=$(python /usr/bin/apt-notifier.py updates)
+        printf "%s%s\n" "UPDATES" "$num_updates" > "${panel_fifo}"
+        sleep 30s &&
+        echo "0" > /tmp/update_status
+    fi
 }
 
+function crash_check() {
+    while ! pgrep -x "lemonbar" > /dev/null; do
+        printf "%s\n" "  ${PRE}${BLUE}Performing crash check${POST}"
+        pipe_it &
+        sleep 1s
+    done
+}
+
+function screen_width_check() {
+    total_width=0
+    while read line; do
+        let total_width=$total_width+$line
+    done < <(xrandr -q | grep " connected " | sed "s@primary @@g" | awk '{print $3}' | cut -dx -f1)
+    echo "${total_width}"
+}
+
+
+## INITIALIZATION ## ###########################################################
+
+# is lemonbar-launch already running?
+if [ $(pgrep -cx $(basename $0)) -gt 1 ]; then
+    printf "%s\n" "  ${PREX}${RED}The lemonbar is already running${POST}"
+    exit
+fi
+
+# check to see if config and conky files exist, and load or create them
+file_check
+
+# get initial checksum of config file
+conf_checksum=$(md5sum $HOME/.config/lemonbar/lemonbar.conf | awk '{print $1}')
+
 # measure initial total screen width, spanning all our monitors
-total_width=0
-while read line; do
-    let total_width=$total_width+$line
-done < <(xrandr -q | grep " connected " | sed "s@primary @@g" | awk '{print $3}' | cut -dx -f1)
+screen_width=$(screen_width_check)
+# calculate what our bar geometry should be, based upon above
+geometry="${screen_width}x${bar_height}+${bar_x}+${bar_y}"
 
-# calculate what our bar geometry should be, based upon above routines
-geometry="${total_width}x${height}+${pos_x}+${pos_y}"
+# initialize our fifo pipe
+[ -e "${panel_fifo}" ] && rm "${panel_fifo}"
+mkfifo "${panel_fifo}"
 
-# pad our screens
-pad_it &
+# start piping conky (CKY)
+conky --quiet -c $HOME/.config/lemonbar/lemonbar_conky > "${panel_fifo}" &
+
+
+## LOOP FEED ## ################################################################
 
 # start piping info to lemonbar, and running related routines
-while :; do
-    # check if our total width has changed, ie. screens were added/removed
-    current_total_width=0
-    while read line; do
-        let current_total_width=$current_total_width+$line
-    done < <(xrandr -q | grep " connected " | sed "s@primary @@g" | awk '{print $3}' | cut -dx -f1)
+while true; do
     
-    # if width has changed, kill current lemonbar instance, then restart
-    if [[ $total_width != $current_total_width ]]; then
-        total_width=$current_total_width
-        geometry="${current_total_width}x${height}+${pos_x}+${pos_y}"
+    # check our current total width
+    current_screen_width=$(screen_width_check)
+
+    # check our current config file checksum
+    current_conf_checksum=$(md5sum $HOME/.config/lemonbar/lemonbar.conf | awk '{print $1}')
+    
+    # if config file has changed, restart bar with new settings
+    if [[ ${current_conf_checksum} != ${conf_checksum} ]]; then
+        printf "%s\n" "  ${PREHF}${YELLOW}Config changed, restarting...${POST}"
         killall lemonbar
-        pad_it &
-        check_updates &
+        conf_checksum=${current_conf_checksum}
+        file_check
+        geometry="${current_screen_width}x${bar_height}+${bar_x}+${bar_y}"
+        pipe_it &
+    fi
+
+    # if width has changed (ie screens added/removes), restart bar to accomodate
+    if [[ $screen_width != $current_screen_width ]]; then
+        printf "%s\n" "  ${PREHF}${YELLOW}Geometry changed, restarting...${POST}"
+        killall lemonbar
+        screen_width=$current_screen_width
+        geometry="${current_screen_width}x${bar_height}+${bar_x}+${bar_y}"
         pipe_it &
     fi
     
+    # check for package updates
+    check_updates &
+    
     # monitors and workspaces (WSN#)
-    tmp=0                                                                       
+    workspace_number=0                                                                       
     while read line; do
-        name=$(echo $line | awk '{print $1}')
-        state=$(echo $line | awk '{print $2}')
-        if [[ ${state} != "[FOCUS]" ]]; then
-            printf "%s%s\n" "WSN${tmp}" "${name}" > "${panel_fifo}"
+        workspace_name=$(echo $line | awk '{print $1}')
+        workspace_state=$(echo $line | awk '{print $2}')
+        
+        if [[ ${workspace_state} != "[FOCUS]" ]]; then
+            printf "%s%s\n" "WSN${workspace_number}" "0${workspace_name}" > "${panel_fifo}"
         else
-            printf "%s%s\n" "WSN${tmp}" "%{T2}${name}%{T1}" > "${panel_fifo}"
+            printf "%s%s\n" "WSN${workspace_number}" "1${workspace_name}" > "${panel_fifo}"
         fi     
-        let tmp=$tmp+1                                                          
+        let workspace_number=$workspace_number+1                                                          
     done < <(herbstclient list_monitors | awk '{print $5" "$6}' | tr -d '"')
     
     # volume (VOL)
-    vol=$(amixer -c $snd_card -M get ${snd_channel} | grep "Front Left: Playback" | cut -d"[" -f2 | cut -d"%" -f1)
-    volstate=$(amixer -c $snd_card -M get ${snd_channel} | grep "Front Left: Playback" | cut -d"[" -f4 | cut -d"]" -f1)
+    volume=$(amixer -c $snd_card -M get ${snd_channel} | grep "Front Left: Playback" | cut -d"[" -f2 | cut -d"%" -f1)
+    volume_state=$(amixer -c $snd_card -M get ${snd_channel} | grep "Front Left: Playback" | cut -d"[" -f4 | cut -d"]" -f1)
     
-    # dynamic vol icon
-    if [[ ${volstate} == "off" || ${vol} == 0 ]]; then
+    # dynamic volume icon
+    if [[ ${volume_state} == "off" || ${volume} == 0 ]]; then
         printf "%s%s\n" "VOLICON" "${icon_vol_mute}" > "${panel_fifo}"
-    elif [[ ${vol} -ge 50 || ${vol} == 100 ]]; then    
+    elif [[ ${volume} -ge 50 || ${volume} == 100 ]]; then    
         printf "%s%s\n" "VOLICON" "${icon_vol_high}" > "${panel_fifo}"
-    elif [[ ${vol} < 50 ]]; then
+    elif [[ ${volume} < 50 ]]; then
         printf "%s%s\n" "VOLICON" "${icon_vol_low}" > "${panel_fifo}"
     fi
     
     # check if muted, print accordingly
-    if [[ ${volstate} != "off" ]]; then
-        if [[ ${vol} == 0 ]]; then
+    if [[ ${volume_state} != "off" ]]; then
+        if [[ ${volume} == 0 ]]; then
             printf "%s%4s\n" "VOL" "mute" > "${panel_fifo}"
         else
-            printf "%s%4s\n" "VOL" "${vol}%" > "${panel_fifo}"
+            printf "%s%4s\n" "VOL" "${volume}%" > "${panel_fifo}"
         fi
-    elif [[ ${volstate} == "off" ]]; then
+    elif [[ ${volume_state} == "off" ]]; then
         printf "%s%4s\n" "VOL" "mute" > "${panel_fifo}"
     fi
     
     # if lemonbar crashed, or is exiting with errors (sometimes when monitors
     # are being configured), then lets wait while we continue to try to
     # successfully relaunch it
-    while ! pgrep -x "lemonbar" > /dev/null ; do
-        pipe_it &
-        sleep 2s
-    done
+    crash_check
     
-    # wait 1 sec
+    # wait 1 sec, before looping
     sleep 1s
 done &
 
-while :; do
-    # available package updates
-    check_updates &
-    echo "update loop"
-    # wait 30 seconds
-    sleep 30s
-done &
-
 # again, pause if for some reason lemonbar doesn't want to successfully launch
-while ! pgrep -x "lemonbar" > /dev/null ; do
-    pipe_it &
-    sleep 2s
-done
+crash_check
+
+# set package update status to 0, so we start checking at runtime
+echo "0" > /tmp/update_status
 
 wait
